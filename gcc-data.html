@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GCC Market Sizing Data — Case Prep Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: white;
+    padding: 40px 2rem 32px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .page-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .page-hero-icon {
+    width: 56px; height: 56px;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: var(--accent);
+    flex-shrink: 0;
+  }
+  .page-hero-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 4px;
+  }
+  .page-hero-title { font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 4px; }
+  .page-hero-sub { font-size: 13px; color: var(--text-muted); }
+
+  /* ── DATA TABLES ── */
+  .data-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12.5px; }
+  .data-table th {
+    background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+    text-align: left;
+    padding: 9px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+  .data-table tr:nth-child(even) td { background: var(--surface); }
+  .data-table td strong { color: var(--text-primary); }
+  .data-table .num { font-family: 'JetBrains Mono', monospace; font-size: 12px; white-space: nowrap; }
+  .table-scroll { overflow-x: auto; margin-bottom: 16px; }
+  .table-scroll .data-table { margin-bottom: 0; min-width: 560px; }
+
+  /* ── TIER BADGES ── */
+  .tier {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 8px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .tier-1 { background: var(--green-bg); color: var(--green); border: 1px solid #90D4A0; }
+  .tier-2 { background: var(--blue-bg); color: var(--blue); border: 1px solid #D9D9D9; }
+  .tier-3 { background: var(--red-bg); color: var(--red); border: 1px solid #EFB8BE; }
+
+  /* ── FOOTNOTE MARKERS ── */
+  .fn-mark {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 10px;
+    text-decoration: none;
+    vertical-align: super;
+  }
+  .fn-mark:hover { text-decoration: underline; }
+
+  /* ── STAT CARDS ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+  .stat-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .stat-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .stat-value { font-size: 17px; font-weight: 700; color: var(--navy); font-family: 'JetBrains Mono', monospace; margin-bottom: 4px; }
+  .stat-label { font-size: 11px; color: var(--text-muted); line-height: 1.35; }
+
+  /* ── CALC BOX ── */
+  .calc-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--blue);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .calc-box .calc-label {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 4px;
+  }
+
+  /* ── FLAG BOX (data discrepancies) ── */
+  .flag-box {
+    background: var(--red-bg);
+    border: 1px solid #EFB8BE;
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+  }
+  .flag-label { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .flag-text { font-size: 13px; color: #8A0E22; line-height: 1.6; }
+
+  /* ── ANCHOR CARD ── */
+  .anchor-final {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+  }
+  .anchor-final-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 14px; letter-spacing: 0.3px; text-transform: uppercase; }
+  .anchor-row {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .anchor-row:last-child { border-bottom: none; }
+  .anchor-key {
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    min-width: 92px;
+    font-size: 12px;
+  }
+
+  /* ── FOOTNOTES SECTION ── */
+  .footnote-list { display: flex; flex-direction: column; gap: 10px; }
+  .footnote-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .footnote-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--red);
+    color: white;
+    font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .src { font-size: 10.5px; color: var(--text-muted); font-style: italic; }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 28px 1.25rem 24px; }
+    .page-hero-icon { width: 44px; height: 44px; font-size: 20px; border-radius: 11px; }
+    .page-hero-title { font-size: 20px; }
+    .page-hero-sub { font-size: 12px; }
+    .stat-grid, .stat-grid.three { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .stat-grid, .stat-grid.three { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .page-hero-inner { gap: 12px; }
+    .page-hero-icon { width: 38px; height: 38px; font-size: 17px; }
+    .page-hero-title { font-size: 17px; }
+    .page-hero-eyebrow { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-brand">
+      <div>
+        <div class="brand-text">Case Prep Hub</div>
+        <div class="brand-sub">Vishnu's Personal Reference</div>
+      </div>
+    </a>
+    <nav class="nav-pills">
+      <a href="index.html" class="nav-pill">Home</a>
+      <a href="case-steps.html" class="nav-pill">7-Step Structure</a>
+      <a href="case-types.html" class="nav-pill">9 Case Types</a>
+      <a href="frameworks.html" class="nav-pill">Frameworks</a>
+      <a href="quant.html" class="nav-pill">Quant &amp; Formulas</a>
+      <a href="charts.html" class="nav-pill">Charts</a>
+      <a href="fit.html" class="nav-pill">Fit Interview</a>
+      <a href="gcc-data.html" class="nav-pill active">GCC Data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-icon">🌍</div>
+    <div>
+      <div class="page-hero-eyebrow">Verified Fact Base · Compiled July 2026</div>
+      <div class="page-hero-title">GCC Market Sizing Data</div>
+      <div class="page-hero-sub">Population, household, and economic anchor numbers for Dubai-based case interviews — with source tiers and footnotes on every unverified figure.</div>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-header">GCC Data</div>
+      <a href="#method" class="sidebar-item"><span class="sidebar-num">★</span> How to Read This</a>
+      <a href="#headline" class="sidebar-item"><span class="sidebar-num">1</span> GCC Headline</a>
+      <a href="#saudi" class="sidebar-item"><span class="sidebar-num">2</span> Saudi Arabia</a>
+      <a href="#uae" class="sidebar-item"><span class="sidebar-num">3</span> UAE</a>
+      <a href="#cities" class="sidebar-item"><span class="sidebar-num">4</span> Dubai &amp; Abu Dhabi</a>
+      <a href="#smaller" class="sidebar-item"><span class="sidebar-num">5</span> KW · OM · QA · BH</a>
+      <a href="#economy" class="sidebar-item"><span class="sidebar-num">6</span> Economic Anchors</a>
+      <a href="#consumer" class="sidebar-item"><span class="sidebar-num">7</span> Consumer Sizing</a>
+      <a href="#anchorcard" class="sidebar-item"><span class="sidebar-num">★</span> Anchor Card</a>
+      <a href="#footnotes" class="sidebar-item"><span class="sidebar-num">†</span> Footnotes</a>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- METHOD -->
+    <section class="section" id="method">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">How to Read This Page</div>
+          <div class="section-subtitle">Every number carries a confidence tier · red footnote markers = not fully verified</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="info-box">
+          <div class="info-box-label">Source tiers</div>
+          <div class="info-box-text">
+            <span class="tier tier-1">TIER 1</span> Official national statistics bodies — GASTAT (Saudi), FCSC (UAE), DSC (Dubai), SCAD (Abu Dhabi), PACI/CSB (Kuwait), NPC (Qatar), NCSI (Oman). Gold standard.<br><br>
+            <span class="tier tier-2">TIER 2</span> Credible media reporting official data — Gulf News, Saudi Gazette, Muscat Daily, KUNA, Al Jazeera.<br><br>
+            <span class="tier tier-3">TIER 3</span> Estimates, not official. Red superscript markers <a href="#footnotes" class="fn-mark">[n]</a> link to footnotes explaining exactly what could not be verified.
+          </div>
+        </div>
+        <div class="flag-box" style="margin-bottom:0;">
+          <div class="flag-label">The single biggest caveat on this page</div>
+          <div class="flag-text">The UAE, Saudi Arabia, and Qatar do <strong>not</strong> publish official nationality-wise breakdowns of their expat populations. All "expats by origin country" figures for those three countries are third-party estimates (largely Global Media Insight, via Al Jazeera's March 2026 GCC explainer). Kuwait is the exception — its PACI officially publishes nationality data. Fine to use in interviews; know what they are.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GCC HEADLINE -->
+    <section class="section" id="headline">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">GCC Headline Numbers</div>
+          <div class="section-subtitle">Six countries · ~62M people · more than half are foreign workers</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="stat-grid three">
+          <div class="stat-card"><div class="stat-value">~62M</div><div class="stat-label">Total GCC population<br>(Al Jazeera, Mar 2026)</div></div>
+          <div class="stat-card"><div class="stat-value">~35M</div><div class="stat-label">Foreign workers / expats<br>(Al Jazeera, Mar 2026)</div></div>
+          <div class="stat-card"><div class="stat-value">~56%</div><div class="stat-label">Expat share of GCC<br>(calc: 35 ÷ 62)</div></div>
+        </div>
+
+        <div class="table-scroll">
+        <table class="data-table">
+          <tr><th>Country</th><th>Total</th><th>Nationals</th><th>Expats</th><th>% Expat</th><th>Source &amp; vintage</th></tr>
+          <tr><td><strong>Saudi Arabia</strong></td><td class="num">35.30M</td><td class="num">19.6M</td><td class="num">15.7M</td><td class="num">44.4%</td><td><span class="tier tier-1">TIER 1</span> GASTAT, mid-2024</td></tr>
+          <tr><td><strong>UAE</strong></td><td class="num">11.29M</td><td class="num">~1.3M<a href="#footnotes" class="fn-mark">[1]</a></td><td class="num">~10M<a href="#footnotes" class="fn-mark">[1]</a></td><td class="num">~88%<a href="#footnotes" class="fn-mark">[1]</a></td><td><span class="tier tier-1">TIER 1</span> FCSC total, end-2024; split is estimate</td></tr>
+          <tr><td><strong>Kuwait</strong></td><td class="num">5.10M<a href="#footnotes" class="fn-mark">[2]</a></td><td class="num">1.55M</td><td class="num">3.55M</td><td class="num">69.6%</td><td><span class="tier tier-1">TIER 1</span> PACI, 30 Jun 2025</td></tr>
+          <tr><td><strong>Oman</strong></td><td class="num">5.36M</td><td class="num">3.04M</td><td class="num">2.32M</td><td class="num">43.3%</td><td><span class="tier tier-1">TIER 1</span> NCSI, end-Dec 2025</td></tr>
+          <tr><td><strong>Qatar</strong></td><td class="num">3.21M</td><td class="num">~330K<a href="#footnotes" class="fn-mark">[3]</a></td><td class="num">~2.87M<a href="#footnotes" class="fn-mark">[3]</a></td><td class="num">~88%<a href="#footnotes" class="fn-mark">[3]</a></td><td><span class="tier tier-1">TIER 1</span> NPC total, end-Dec 2025; split is estimate</td></tr>
+          <tr><td><strong>Bahrain</strong></td><td class="num">~1.6M<a href="#footnotes" class="fn-mark">[4]</a></td><td class="num">~47%<a href="#footnotes" class="fn-mark">[4]</a></td><td class="num">~53%<a href="#footnotes" class="fn-mark">[4]</a></td><td class="num">~53%<a href="#footnotes" class="fn-mark">[4]</a></td><td><span class="tier tier-3">TIER 3</span> Estimates; last census 2020</td></tr>
+        </table>
+        </div>
+
+        <div class="section-label">GCC-wide expat origins (Tier 3 — GMI estimates via Al Jazeera, Mar 2026)<a href="#footnotes" class="fn-mark">[5]</a></div>
+        <div class="table-scroll">
+        <table class="data-table">
+          <tr><th>Origin</th><th>Estimate</th><th>Origin</th><th>Estimate</th></tr>
+          <tr><td>India</td><td class="num">9.1M</td><td>Yemen</td><td class="num">2.2M</td></tr>
+          <tr><td>Bangladesh</td><td class="num">5.0M</td><td>Nepal</td><td class="num">1.2M</td></tr>
+          <tr><td>Pakistan</td><td class="num">4.9M</td><td>Sudan</td><td class="num">1.1M</td></tr>
+          <tr><td>Egypt</td><td class="num">3.3M</td><td>Syria</td><td class="num">694K</td></tr>
+          <tr><td>Philippines</td><td class="num">2.2M</td><td>Sri Lanka</td><td class="num">650K</td></tr>
+        </table>
+        </div>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">Sanity check run on these figures</div>
+          <div class="tip-box-text">Top-10 origins sum to ~30.3M of ~35M total expats (87%) — internally consistent. Structural facts to cite in cases: working-age share is 75–84% across GCC (vs ~65% globally); populations are 60–75% male; the 65+ segment is ~3% — effectively no senior consumer market except among nationals.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAUDI -->
+    <section class="section" id="saudi">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Saudi Arabia — Largest GCC Market</div>
+          <div class="section-subtitle">GASTAT official data · population, households, income, age structure</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="section-label">Population (GASTAT, mid-2024 — Tier 1)</div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-value">35.30M</div><div class="stat-label">Total, +4.7% YoY</div></div>
+          <div class="stat-card"><div class="stat-value">19.6M</div><div class="stat-label">Saudis (55.6%)</div></div>
+          <div class="stat-card"><div class="stat-value">15.7M</div><div class="stat-label">Non-Saudis (44.4%)</div></div>
+          <div class="stat-card"><div class="stat-value">62% ♂</div><div class="stat-label">Male share of total</div></div>
+        </div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">A</span><div class="num-text"><strong>Age structure:</strong> 15–64 = 74.7% (26.4M) · 0–14 = 22.5% (7.9M) · 65+ = only 2.8% (~1M). Among non-Saudis, 89.9% are working age vs 62.7% of Saudis. <span class="src">GASTAT 2024</span></div></li>
+          <li class="num-item"><span class="num-badge">B</span><div class="num-text"><strong>Youth skew:</strong> average Saudi is 26.6 years old (median 23.5); 71% of Saudis are under 35. The under-25 market is overwhelmingly national; the labor market is overwhelmingly expat. <span class="src">GASTAT Family Report 2024</span></div></li>
+          <li class="num-item"><span class="num-badge">C</span><div class="num-text"><strong>More recent (unofficial) figure:</strong> ~37M total with ~20.5M nationals reported for 2025/26 — ahead of GASTAT's next official release.<a href="#footnotes" class="fn-mark">[6]</a></div></li>
+        </ul>
+
+        <div class="section-label">Households (Census 2022 — Tier 1)</div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-value">8.17M</div><div class="stat-label">Total households</div></div>
+          <div class="stat-card"><div class="stat-value">4.2M</div><div class="stat-label">Saudi families @ 4.8 avg</div></div>
+          <div class="stat-card"><div class="stat-value">2.7</div><div class="stat-label">Avg non-Saudi household size</div></div>
+          <div class="stat-card"><div class="stat-value">51%</div><div class="stat-label">Of 8M+ dwellings are apartments</div></div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">The 3-region shortcut</div>
+          <div class="info-box-text">Riyadh + Makkah + Eastern Province hold <strong>68% of the population</strong>. Riyadh region: 2.3M households (996K Saudi / 1.3M non-Saudi). Makkah region: 2.1M households. Any Saudi consumer case is effectively a 3-region case. <span class="src">Census 2022 via GASTAT/Argaam</span></div>
+        </div>
+
+        <div class="section-label">Income — the defining consumer stat (GASTAT HICES 2023, n = 122,325 households — Tier 1)</div>
+        <div class="table-scroll">
+        <table class="data-table">
+          <tr><th>Metric (monthly)</th><th>Kingdom avg</th><th>Saudi HH</th><th>Non-Saudi HH</th></tr>
+          <tr><td>Disposable household income</td><td class="num">SAR 11,839</td><td class="num"><strong>SAR 18,056</strong></td><td class="num"><strong>SAR 5,428</strong></td></tr>
+          <tr><td>Consumption expenditure</td><td class="num">SAR 10,884</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>Per-capita disposable income</td><td class="num">SAR 3,195</td><td class="num">SAR 3,977</td><td class="num">SAR 1,908</td></tr>
+        </table>
+        </div>
+        <div class="calc-box">
+          <div class="calc-label">Conversion at the 3.75 SAR/USD peg</div>
+          Saudi HH: 18,056 ÷ 3.75 ≈ $4,800/mo ≈ $58K/yr<br>
+          Non-Saudi HH: 5,428 ÷ 3.75 ≈ $1,450/mo ≈ $17K/yr<br>
+          Gap: 18,056 ÷ 5,428 = <strong>3.3x</strong>
+        </div>
+        <div class="tip-box">
+          <div class="tip-box-label">Why the 3.3x gap matters</div>
+          <div class="tip-box-text">"35M consumers" is a fiction. Saudi is ~20M nationals with Western-Europe-level household incomes plus ~16M expats earning a fraction of that — and remitting heavily: workers' remittances hit SAR 217.4B in 2025 (+26.9%), ≈ $58B leaving the consumer economy annually. Segment first, then size.</div>
+        </div>
+
+        <div class="section-label">Saudi expat origins (Tier 3 — GMI via Al Jazeera, Mar 2026)<a href="#footnotes" class="fn-mark">[5]</a></div>
+        <div class="table-scroll">
+        <table class="data-table">
+          <tr><th>Origin</th><th>Estimate</th><th>Origin</th><th>Estimate</th></tr>
+          <tr><td>Bangladesh</td><td class="num">2.59M</td><td>Yemen</td><td class="num">2.21M</td></tr>
+          <tr><td>India</td><td class="num">2.31M</td><td>Egypt</td><td class="num">1.80M</td></tr>
+          <tr><td>Pakistan</td><td class="num">2.23M</td><td>Sudan</td><td class="num">1.00M</td></tr>
+        </table>
+        </div>
+        <p class="prose" style="margin-bottom:0;">Distinctive shape: far more South Asian labor + Arab (Yemen, Egypt, Sudan) weighted than the UAE's Indian-dominated mix.</p>
+      </div>
+    </section>
+
+    <!-- UAE -->
+    <section class="section" id="uae">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">UAE — Your Home Market</div>
+          <div class="section-subtitle">FCSC official data · know this cold for Dubai interviews</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="section-label">Population (FCSC, end-2024 — Tier 1)</div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-value">11.29M</div><div class="stat-label">Total (11,294,243), +5.7% in 2024</div></div>
+          <div class="stat-card"><div class="stat-value">64% ♂</div><div class="stat-label">7.24M male / 4.06M female</div></div>
+          <div class="stat-card"><div class="stat-value">3.6x</div><div class="stat-label">Growth since 2000 (3.17M → 11.3M)</div></div>
+          <div class="stat-card"><div class="stat-value">~88%</div><div class="stat-label">Expat share (estimate)<a href="#footnotes" class="fn-mark">[1]</a></div></div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-label">The structural quirk that changes every UAE sizing</div>
+          <div class="info-box-text">Labor force = 9.4M (2024, FCSC); employed = 9.2M; unemployment 1.9%. Calc: 9.4 ÷ 11.3 = <strong>~83% of all residents are in the workforce</strong> (a normal country is ~50%). Corollary: children and seniors are structurally scarce — any kids/seniors product has a far smaller base than raw population suggests.</div>
+        </div>
+
+        <div class="section-label">The three-tier consumer structure<a href="#footnotes" class="fn-mark">[7]</a></div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Emiratis (~1.3M, ~12%):</strong> highest income, government-employment-heavy, larger households.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Professional expats (order of 3–4M incl. families):</strong> the premium consumer engine of Dubai and Abu Dhabi.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Blue-collar workers (order of 4–5M):</strong> high headcount, low local consumption, high remittance share. Visible in the data via gender ratios and collective-household counts.</div></li>
+        </ul>
+
+        <div class="section-label">UAE expat origins (Tier 3 — GMI via Al Jazeera, Mar 2026)<a href="#footnotes" class="fn-mark">[5]</a></div>
+        <div class="table-scroll">
+        <table class="data-table">
+          <tr><th>Origin</th><th>Estimate</th><th>~% of UAE pop</th></tr>
+          <tr><td>India</td><td class="num">4.36M</td><td class="num">~38%</td></tr>
+          <tr><td>Pakistan</td><td class="num">1.90M</td><td class="num">~17%</td></tr>
+          <tr><td>Bangladesh</td><td class="num">840K</td><td class="num">~7%</td></tr>
+          <tr><td>Philippines</td><td class="num">780K</td><td class="num">~7%</td></tr>
+          <tr><td>Iran</td><td class="num">540K</td><td class="num">~5%</td></tr>
+          <tr><td>Egypt</td><td class="num">480K</td><td class="num">~4%</td></tr>
+        </table>
+        </div>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">The killer stat</div>
+          <div class="tip-box-text">Indians alone ≈ 38–39% of the UAE's entire population — roughly 3x the number of Emiratis. Sanity check: top-6 origins sum to 8.9M of ~10M expats (89%) — internally consistent.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DUBAI & ABU DHABI -->
+    <section class="section" id="cities">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">Dubai &amp; Abu Dhabi — City Deep Dive</div>
+          <div class="section-subtitle">DSC and SCAD official data · near-identical size, very different economies</div>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="flag-box">
+          <div class="flag-label">Dubai data flag — two official series coexist</div>
+          <div class="flag-text">Dubai's official Population Bulletin puts end-2024 at <strong>4,248,200</strong> (2022–24 series revised using the "Dubai Population Now 2025" methodology). But DSC's public Population Clock reported crossing 4M (4,006,656) on 8 Sep 2025 — the pre-revision series. Both are official DSC; they cannot be fully reconciled. Interview-safe: <strong>"Dubai ≈ 4–4.2M residents."</strong><a href="#footnotes" class="fn-mark">[8]</a></div>
+        </div>
+
+        <div class="section-label">Dubai (DSC Population Bulletin, end-2024 — Tier 1)</div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-value">4.25M</div><div class="stat-label">Residents (revised series)<a href="#footnotes" class="fn-mark">[8]</a></div></div>
+          <div class="stat-card"><div class="stat-value">68.5% ♂</div><div class="stat-label">218 males per 100 females</div></div>
+          <div class="stat-card"><div class="stat-value">56.7%</div><div class="stat-label">Aged 25–44 (peak group: 30–34)</div></div>
+          <div class="stat-card"><div class="stat-value">5.94M</div><div class="stat-label">Peak daytime population<a href="#footnotes" class="fn-mark">[9]</a></div></div>
+        </div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">A</span><div class="num-text"><strong>Households: 771,200</strong> at end-2024 (+8.4% YoY, +59,610 new households), average size 4.0. Sanity check: 771,200 × 4 = 3.08M ≪ 4.25M population → the household count excludes collective/labor households. For family-consumer sizing use ~770K households; for total-population sizing use ~4.2M people. Choosing the wrong base is a ~35% error. <span class="src">DSC via Emirates 24|7</span></div></li>
+          <li class="num-item"><span class="num-badge">B</span><div class="num-text"><strong>Emiratis in Dubai: 299,600</strong> citizens vs 3,564,000 non-citizens → ~7–8% Emirati (calc: 299.6K ÷ 3.86M).<a href="#footnotes" class="fn-mark">[10]</a></div></li>
+          <li class="num-item"><span class="num-badge">C</span><div class="num-text"><strong>Geography:</strong> Sector 3 (central coastal strip — Bur Dubai, Jumeirah) holds 1.51M people = 35.6%. Largest single communities are labor-camp areas: Jabal Ali Industrial First (205K), Muhaisanah Second (161K), Al Qouz Industrial Second (144K). <span class="src">DSC Bulletin 2024</span></div></li>
+          <li class="num-item"><span class="num-badge">D</span><div class="num-text"><strong>Trajectory:</strong> 1M in 2002 → 2M in 2011 → 3M in 2018 → 4M in 2025. Urban Master Plan 2040 targets 5.8M residents / 7.8M daytime. <span class="src">DSC via Gulf News</span></div></li>
+        </ul>
+
+        <div class="section-label">Abu Dhabi (SCAD register-based census, 2024 — Tier 1)</div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-value">4.14M</div><div class="stat-label">Total (4,135,985), +7.5% YoY</div></div>
+          <div class="stat-card"><div class="stat-value">66.9% ♂</div><div class="stat-label">2.77M male / 1.37M female</div></div>
+          <div class="stat-card"><div class="stat-value">2.76M</div><div class="stat-label">Labour force (67% of pop)</div></div>
+          <div class="stat-card"><div class="stat-value">784K</div><div class="stat-label">Residential units</div></div>
+        </div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">A</span><div class="num-text"><strong>Regional split (memorize):</strong> Abu Dhabi Region 2.82M (68.2%) · Al Ain 987K (23.9%) · Al Dhafra 326K (7.9%). Al Dhafra is 81% male — the industrial/energy hinterland, effectively not a family-consumer market. <span class="src">SCAD</span></div></li>
+          <li class="num-item"><span class="num-badge">B</span><div class="num-text"><strong>Age:</strong> ~84% aged 15–64 (3.4M+ working age); 54% aged 25–44; median age 33. <span class="src">SCAD</span></div></li>
+          <li class="num-item"><span class="num-badge">C</span><div class="num-text"><strong>Economy:</strong> GDP AED 1.2 trillion in 2024 (+3.8%) ≈ $326B (calc: 1,200 ÷ 3.6725); non-oil = 54.7% of output. <span class="src">SCAD</span></div></li>
+        </ul>
+
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">Dubai vs Abu Dhabi in one line</div>
+          <div class="tip-box-text">Near-identical size (~4.1–4.2M each), but Dubai is trade/tourism/services with a huge daytime swell, while Abu Dhabi carries the oil + sovereign-capital economy with two-thirds of its people in the capital region.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SMALLER FOUR -->
+    <section class="section" id="smaller">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div>
+          <div class="section-title">Kuwait · Oman · Qatar · Bahrain</div>
+          <div class="section-subtitle">Key facts and known data issues per country</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="section-label">Kuwait — official bodies disagree<a href="#footnotes" class="fn-mark">[2]</a></div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">K</span><div class="num-text"><strong>PACI</strong> (civil-ID registry): 5,098,539 as of 30 Jun 2025 — Kuwaitis 1,550,547 / non-Kuwaitis 3,547,992. <strong>CSB</strong> (estimates bulletin): 4,881,254 at start-2025, with the non-Kuwaiti count <em>declining</em> 1.56% YoY. Both official; interview-safe: ~5M, ~30/70 national-expat. Expat origins (PACI, official): India 1,007,961 (~21% of the whole country, 29% of expats); Egypt 657,280. Sector split: Kuwaitis are 78% of public-sector workers but only 4% of private-sector. <span class="src">PACI/CSB via KUNA, Gulf News, Kuwait Times</span></div></li>
+        </ul>
+        <div class="section-label">Oman — corrected a major-source error</div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">O</span><div class="num-text"><strong>NCSI official:</strong> 5,359,557 at end-Dec 2025 — Omanis 3,039,348 (56.7%) / expats 2,320,209 (43.3%); ~5.4M in latest 2025 reporting. Al Jazeera's Mar-2026 explainer shows Oman at 4.7M — outdated; the NCSI figure supersedes it. Muscat governorate: 1.53M, of which 936K expats — Muscat is majority-expat even though Oman overall is majority-national. Origins: India ~767K, Bangladesh ~719K, Pakistan ~269K (firmer than UAE/Saudi — NCSI tracks nationality). <span class="src">NCSI via Muscat Daily, Oman Observer</span></div></li>
+        </ul>
+        <div class="section-label">Qatar</div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">Q</span><div class="num-text"><strong>NPC official:</strong> 3,214,609 at end-Dec 2025 (+2.3% YoY). Nationals split not officially published — consensus ~330K Qataris (~10–12%) / ~2.87M expats.<a href="#footnotes" class="fn-mark">[3]</a> Origins (Tier 3): India ~700K, Bangladesh ~400K, Nepal ~400K, Egypt ~300K, Philippines ~236K — Nepal tying for #2 is Qatar's distinctive construction-legacy feature. <span class="src">NPC via The Peninsula, Qatar Tribune; origins GMI/Al Jazeera</span></div></li>
+        </ul>
+        <div class="section-label">Bahrain — weakest data of the six<a href="#footnotes" class="fn-mark">[4]</a></div>
+        <ul class="num-list" style="margin-bottom:0;">
+          <li class="num-item"><span class="num-badge">B</span><div class="num-text">Last census (2020): ~1.50M. Current estimates range 1.58M (Al Jazeera) to ~1.64M (UN WPP). Bahraini citizens just under half. Treat as <strong>~1.6M, ~47/53 national-expat</strong>. Origins (Tier 3): India ~350K, Bangladesh ~110K, Pakistan ~100K. <span class="src">Census 2020, UN WPP, Al Jazeera</span></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ECONOMIC ANCHORS -->
+    <section class="section" id="economy">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div>
+          <div class="section-title">Economic Anchors — All Six</div>
+          <div class="section-subtitle">World Bank GDP 2024 · per-capita figures are calculated, arithmetic shown</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="table-scroll">
+        <table class="data-table">
+          <tr><th>Country</th><th>GDP 2024 (US$)</th><th>Population used</th><th>GDP/capita (calc)</th></tr>
+          <tr><td><strong>Saudi Arabia</strong></td><td class="num">$1,239.8B</td><td class="num">35.3M</td><td class="num">≈ $35.1K</td></tr>
+          <tr><td><strong>UAE</strong></td><td class="num">$552.3B</td><td class="num">11.29M</td><td class="num">≈ $48.9K</td></tr>
+          <tr><td><strong>Qatar</strong></td><td class="num">$219.2B</td><td class="num">3.21M</td><td class="num">≈ $68.3K<a href="#footnotes" class="fn-mark">[11]</a></td></tr>
+          <tr><td><strong>Kuwait</strong></td><td class="num">$160.2B</td><td class="num">5.0M</td><td class="num">≈ $32.0K</td></tr>
+          <tr><td><strong>Oman</strong></td><td class="num">$107.1B</td><td class="num">5.36M</td><td class="num">≈ $20.0K</td></tr>
+          <tr><td><strong>Bahrain</strong></td><td class="num">$47.1B</td><td class="num">1.6M</td><td class="num">≈ $29.4K</td></tr>
+          <tr><td><strong>GCC total</strong></td><td class="num"><strong>≈ $2,326B</strong></td><td class="num">~62M</td><td class="num">≈ $37.5K avg</td></tr>
+        </table>
+        </div>
+        <div class="calc-box">
+          <div class="calc-label">Concentration calcs</div>
+          Saudi share of GCC GDP: 1,239.8 ÷ 2,326 ≈ 53%<br>
+          Saudi + UAE: (1,239.8 + 552.3) ÷ 2,326 ≈ 77%<br>
+          Per-capita rank: QA &gt; AE &gt; SA &gt; KW &gt; BH &gt; OM (nominal, not PPP)
+        </div>
+        <ul class="num-list" style="margin-bottom:0;">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>UAE 2025:</strong> GDP grew 6.2% to AED 1.9T; non-oil GDP AED 1.5T → non-oil ≈ 79% of output (calc: 1.5 ÷ 1.9). The UAE is no longer primarily an oil economy in output terms. <span class="src">FCSC</span></div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Saudi 2025 real GDP mix:</strong> SAR 1.3T oil · SAR 2.7T non-oil · SAR 648B government → non-oil ≈ 58% (calc: 2.7 ÷ 4.65). <span class="src">GASTAT via DataSaudi</span></div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Saudi remittance outflow:</strong> SAR 217.4B in 2025 (+26.9%) ≈ $58B — money earned by expats that leaves the consumer economy. A crucial haircut when sizing expat consumption. <span class="src">via DataSaudi</span></div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Currency pegs (fixed, safe in any interview):</strong> 1 USD = 3.6725 AED · 1 USD = 3.75 SAR.</div></li>
+          <li class="num-item"><span class="num-badge">5</span><div class="num-text"><strong>Household size anchors:</strong> Saudi nationals 4.8 / Saudi expats 2.7 (Census 2022) · Dubai 4.0 (DSC). General GCC rule: ~4–5 for national households, ~2–3 for expat family households.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONSUMER SIZING -->
+    <section class="section" id="consumer">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <div>
+          <div class="section-title">Consumer Sizing Playbooks — Saudi &amp; UAE</div>
+          <div class="section-subtitle">Worked segmentation logic using only the verified numbers above</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="section-label">Worked example — mid-market family product in Saudi</div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Start with households:</strong> 8.2M total → segment into ~4.2M Saudi + ~4.0M non-Saudi.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Target the premium family segment:</strong> Saudi households ($58K/yr income) + a high-income expat slice (state assumption aloud, e.g. top ~15% of expat households ≈ 0.6M) ≈ 4.8M households.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Apply urban concentration:</strong> × 68% in the big-3 regions ≈ 3.3M addressable households.</div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Then penetration × spend.</strong> A defensible base in 3 steps, each tied to a census number.</div></li>
+        </ul>
+
+        <div class="section-label">Worked example — premium consumer service in Dubai</div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Strip the collective-household labor population:</strong> 4.2M people → ~770K family households (~3.1M people).</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Split by nationality:</strong> ~300K Emirati citizens ÷ ~5 per household ≈ 60K Emirati households; expat family households ≈ 710K.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Premium slice (flag the assumption):</strong> e.g. top ~40% of expat family households ≈ 280K + most Emirati households ≈ 340K target households.</div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Then penetration × price.</strong> Every step traces to a DSC number except the premium-share assumption — which is exactly the one to flag to your interviewer.</div></li>
+        </ul>
+
+        <div class="flag-box" style="margin-bottom:0;">
+          <div class="flag-label">UAE income data gap — be upfront in interviews</div>
+          <div class="flag-text">No official published UAE-wide household income figures were found.<a href="#footnotes" class="fn-mark">[12]</a> Dubai completed its Household Income &amp; Expenditure Survey 2024, but results do not appear to be public yet. If a case needs UAE income segmentation, say so explicitly and triangulate from GDP per capita (~$49K) instead.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANCHOR CARD -->
+    <section class="section" id="anchorcard">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">The Anchor Card — Memorize Before Interviews</div>
+          <div class="section-subtitle">Rounded for fast interview math · review this on the metro</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="anchor-final" style="margin-bottom:0;">
+          <div class="anchor-final-title">GCC Market Sizing Anchors — July 2026</div>
+          <div class="anchor-row"><span class="anchor-key">GCC</span><span>60M total · 35M expats (~56%) · GDP ≈ $2.3T · Saudi = 53% of GDP, Saudi+UAE = 77%</span></div>
+          <div class="anchor-row"><span class="anchor-key">Saudi</span><span>35M · 55/45 national-expat · 62% male · 8.2M households (4.2M Saudi @ 4.8 / 4.0M expat @ 2.7) · big-3 regions = 68% · HH income: Saudi SAR 18.1K vs expat SAR 5.4K/mo (3.3x) · 71% of Saudis under 35</span></div>
+          <div class="anchor-row"><span class="anchor-key">UAE</span><span>11M · ~90% expat · 83% of residents in labor force · Indians ~4.4M (~40%) · pegs: 3.67 AED / 3.75 SAR per USD</span></div>
+          <div class="anchor-row"><span class="anchor-key">Dubai</span><span>4–4.2M · 68% male · 57% aged 25–44 · 770K family households @ 4.0 · ~8% Emirati · daytime ~6M</span></div>
+          <div class="anchor-row"><span class="anchor-key">Abu Dhabi</span><span>4.1M · 68% in capital region · labor force 2.8M · 784K residential units · GDP ~$326B, 55% non-oil</span></div>
+          <div class="anchor-row"><span class="anchor-key">Kuwait</span><span>5M · 70% expat · 1M Indians · Kuwaitis: 78% of public sector, 4% of private</span></div>
+          <div class="anchor-row"><span class="anchor-key">Oman</span><span>5.4M · 43% expat (majority-national — the outlier with Saudi) · Muscat 1.5M</span></div>
+          <div class="anchor-row"><span class="anchor-key">Qatar</span><span>3.2M · 88% expat · richest per capita (~$68K+)</span></div>
+          <div class="anchor-row"><span class="anchor-key">Bahrain</span><span>1.6M · ~53% expat · smallest GCC market</span></div>
+          <div class="anchor-row"><span class="anchor-key">Structure</span><span>Working-age 75–84% (vs ~65% global) · 60–75% male · 65+ ≈ 3% — no senior mass market; kids/seniors bases far smaller than population suggests</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTNOTES -->
+    <section class="section" id="footnotes">
+      <div class="section-header">
+        <div class="section-num">†</div>
+        <div>
+          <div class="section-title">Footnotes — What Was Not Verified</div>
+          <div class="section-subtitle">Every red marker on this page resolves here · updated July 2026</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="footnote-list">
+          <div class="footnote-item"><div class="footnote-num">1</div><div><strong>UAE nationals vs expats split.</strong> The FCSC publishes the total population but no official nationals/expats breakdown. The ~12% Emirati / ~88% expat split (~1.3M / ~10M) is a consensus estimate widely reported (incl. Al Jazeera, Mar 2026) but is not an official statistic.</div></div>
+          <div class="footnote-item"><div class="footnote-num">2</div><div><strong>Kuwait total population.</strong> Kuwait's two official bodies disagree by ~220K: PACI registry shows 5.10M (Jun 2025) while the Central Statistical Bureau estimates 4.88M (start-2025). Both are official; the gap reflects registry-vs-estimate methodology and is unresolved. The national/expat ratio (~30/70) is consistent across both.</div></div>
+          <div class="footnote-item"><div class="footnote-num">3</div><div><strong>Qatar nationals vs expats split.</strong> The NPC publishes only the total. The ~330K Qatari / ~2.87M expat split (~12%/88%) is a consensus estimate; Qatar does not officially publish a complete nationality breakdown.</div></div>
+          <div class="footnote-item"><div class="footnote-num">4</div><div><strong>Bahrain — all current figures.</strong> No single authoritative post-2020 official figure was found. The 2020 census recorded ~1.50M; current estimates range from 1.58M (Al Jazeera, Mar 2026) to ~1.64M (UN World Population Prospects). The ~47/53 national/expat split derives from the 2020 census and secondary estimates.</div></div>
+          <div class="footnote-item"><div class="footnote-num">5</div><div><strong>All expat-by-origin figures for UAE, Saudi, Qatar, Bahrain, and the GCC-wide table.</strong> These originate largely from Global Media Insight (a Dubai digital marketing agency), embassy estimates, and media compilations — Al Jazeera's March 2026 explainer explicitly credits GMI. No official source publishes them. Kuwait (PACI) and Oman (NCSI) are the exceptions with official nationality tracking.</div></div>
+          <div class="footnote-item"><div class="footnote-num">6</div><div><strong>Saudi ~37M (2025/26).</strong> Media/GMI estimates ahead of GASTAT's next official release. The verified official figure remains 35.3M (mid-2024). Directionally consistent with GASTAT's reported 4.7% growth rate.</div></div>
+          <div class="footnote-item"><div class="footnote-num">7</div><div><strong>UAE three-tier consumer structure.</strong> The existence of the tiers is directly visible in official data (gender ratios, collective-household exclusions, labor statistics), but the numerical boundaries between tiers (3–4M professional / 4–5M blue-collar) are estimates, not published statistics.</div></div>
+          <div class="footnote-item"><div class="footnote-num">8</div><div><strong>Dubai population — two official series.</strong> The DSC Population Bulletin (revised via "Dubai Population Now 2025") gives 4,248,200 at end-2024, while the DSC Population Clock reported crossing 4,006,656 in Sep 2025 on the pre-revision series. Both are official DSC outputs; the inconsistency could not be reconciled from public sources.</div></div>
+          <div class="footnote-item"><div class="footnote-num">9</div><div><strong>Dubai daytime population.</strong> The DSC Bulletin gives 5,937,800 (peak-hour active, incl. commuters, tourists, sailors); an Emirates 24|7 report citing DSC gives 5.13M for "peak-time." Different measures or vintages; unreconciled. The bulletin figure is used here as the primary source.</div></div>
+          <div class="footnote-item"><div class="footnote-num">10</div><div><strong>Dubai citizen/non-citizen counts.</strong> The 299,600 / 3,564,000 split sums to ~3.86M — matching the pre-revision series, not the revised 4.25M total. The ~7–8% Emirati share is robust either way; the absolute expat count under the revised series would be higher.</div></div>
+          <div class="footnote-item"><div class="footnote-num">11</div><div><strong>Qatar GDP per capita.</strong> Swings ±10%+ by denominator: using NPC's 3.21M gives ≈$68K; the World Bank's own population series (~2.86M) gives ≈$77K. All per-capita figures on this page are nominal, not PPP — PPP figures run substantially higher for Qatar, Kuwait, and Saudi.</div></div>
+          <div class="footnote-item"><div class="footnote-num">12</div><div><strong>UAE household income and UAE-wide household count.</strong> Not found in any official publication. Dubai's Household Income &amp; Expenditure Survey 2024 was completed (announced by Dubai Data &amp; Statistics Establishment) but results do not appear to be published. The UAE-wide family-household estimate of ~2.0–2.3M is an extrapolation from Dubai's official 771K count, not an official statistic.</div></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  Sources: <strong>GASTAT · FCSC · DSC · SCAD · PACI · NPC · NCSI</strong> (official) + Gulf News, Saudi Gazette, Muscat Daily, KUNA, Al Jazeera (Mar 2026), World Bank · Compiled July 2026 · Living document — re-verify before final-round interviews.
+</footer>
+
+<script>
+  const sidebarItems = document.querySelectorAll('.sidebar-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        const matchingLink = document.querySelector(`.sidebar-item[href="#${id}"]`);
+        if (matchingLink) {
+          sidebarItems.forEach(i => i.classList.remove('active'));
+          matchingLink.classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px 0px 0px' });
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

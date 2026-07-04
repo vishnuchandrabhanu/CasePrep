@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fit &amp; Behavioural Interview — MBB Case Prep Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* ── PAGE HERO (matches frameworks.html / quant.html pattern) ── */
+  .page-hero {
+    background: white;
+    padding: 40px 2rem 32px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .page-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .page-hero-icon {
+    width: 56px; height: 56px;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: var(--accent);
+    flex-shrink: 0;
+  }
+  .page-hero-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 4px;
+  }
+  .page-hero-title { font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 4px; }
+  .page-hero-sub { font-size: 13px; color: var(--text-muted); }
+
+  /* ── STORY STRUCTURE CARDS ── */
+  .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  .story-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    transition: all 0.15s;
+  }
+  .story-card:hover { border-color: var(--accent); }
+  .story-card-name { font-size: 14px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; margin-bottom: 3px; }
+  .story-card-src { font-size: 10px; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .story-letter { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+  .story-letter:last-child { margin-bottom: 0; }
+  .story-letter-badge {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: white; border: 2px solid var(--accent); color: var(--accent);
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .story-letter-text { font-size: 11.5px; color: var(--text-secondary); line-height: 1.4; }
+  .story-letter-text strong { color: var(--navy); font-weight: 600; }
+
+  /* ── TIME-WEIGHT BAR ── */
+  .weight-bar { display: flex; border-radius: 8px; overflow: hidden; margin-bottom: 8px; border: 1px solid var(--border); }
+  .weight-seg { padding: 10px 8px; text-align: center; font-size: 11px; font-weight: 600; color: white; }
+  .weight-label { font-size: 9px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; opacity: 0.85; display: block; margin-bottom: 2px; }
+
+  /* ── CATEGORY CARDS ── */
+  .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+  .cat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    border-top: 3px solid var(--navy);
+  }
+  .cat-card-head {
+    padding: 12px 16px 10px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-card);
+  }
+  .cat-card-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 2px solid var(--accent); color: var(--accent);
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cat-card-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .cat-card-body { padding: 12px 16px; }
+  .cat-q { font-size: 12px; color: var(--text-secondary); line-height: 1.45; padding-left: 14px; position: relative; margin-bottom: 7px; }
+  .cat-q:last-child { margin-bottom: 0; }
+  .cat-q::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+
+  /* ── STORY BANK TABLE ── */
+  .bank-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .bank-table th {
+    padding: 11px 14px; text-align: left; background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.6px; text-transform: uppercase;
+  }
+  .bank-table th:not(:first-child) { color: var(--text-muted); }
+  .bank-table td { padding: 11px 14px; color: var(--text-secondary); border-bottom: 1px solid var(--border); vertical-align: top; }
+  .bank-table tr:nth-child(even) td { background: var(--surface); }
+  .bank-table td:first-child { font-weight: 600; color: var(--text-primary); }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 28px 1.25rem 24px; }
+    .page-hero-icon { width: 44px; height: 44px; font-size: 20px; border-radius: 11px; }
+    .page-hero-title { font-size: 20px; }
+    .page-hero-sub { font-size: 12px; }
+    .story-grid { grid-template-columns: 1fr; }
+    .cat-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .page-hero-inner { gap: 12px; }
+    .page-hero-icon { width: 38px; height: 38px; font-size: 17px; }
+    .page-hero-title { font-size: 17px; }
+    .page-hero-eyebrow { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-brand">
+      <div>
+        <div class="brand-text">Case Prep Hub</div>
+        <div class="brand-sub">Vishnu's Personal Reference</div>
+      </div>
+    </a>
+    <nav class="nav-pills">
+      <a href="index.html" class="nav-pill">Home</a>
+      <a href="case-steps.html" class="nav-pill">7-Step Structure</a>
+      <a href="case-types.html" class="nav-pill">9 Case Types</a>
+      <a href="frameworks.html" class="nav-pill">Frameworks</a>
+      <a href="quant.html" class="nav-pill">Quant &amp; Formulas</a>
+      <a href="charts.html" class="nav-pill">Charts</a>
+      <a href="fit.html" class="nav-pill active">Fit Interview</a>
+      <a href="gcc-data.html" class="nav-pill">GCC Data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-icon">💬</div>
+    <div>
+      <div class="page-hero-eyebrow">Behavioural / Fit Interview</div>
+      <div class="page-hero-title">Fit &amp; Behavioural Interview</div>
+      <div class="page-hero-sub">Roughly half of every MBB interview is fit. Story structures, question banks, and a repeatable prep system.</div>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-header">Fit Interview</div>
+      <a href="#why" class="sidebar-item"><span class="sidebar-num">★</span> Why Fit Matters</a>
+      <a href="#structures" class="sidebar-item"><span class="sidebar-num">1</span> Story Structures</a>
+      <a href="#timing" class="sidebar-item"><span class="sidebar-num">2</span> Timing &amp; Weighting</a>
+      <a href="#categories" class="sidebar-item"><span class="sidebar-num">3</span> Question Categories</a>
+      <a href="#motivation" class="sidebar-item"><span class="sidebar-num">4</span> Why Consulting / Firm</a>
+      <a href="#bank" class="sidebar-item"><span class="sidebar-num">5</span> Your Story Bank</a>
+      <a href="#mistakes" class="sidebar-item"><span class="sidebar-num">6</span> 4 Mistakes</a>
+      <a href="#quickref" class="sidebar-item"><span class="sidebar-num">★</span> Quick Ref</a>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- WHY FIT MATTERS -->
+    <section class="section" id="why">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">Why Fit Is Scored Like the Case</div>
+          <div class="section-subtitle">Candidates underprepare for fit — that's exactly where you can pull ahead</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="info-box">
+          <div class="info-box-label">The honest truth about fit</div>
+          <div class="info-box-text">The interviewer's real question is simple: <strong>would I want this person on my team at a client site at 11pm?</strong> Cases test your IQ; fit tests your EQ — communication, poise, self-awareness, and whether your stories hold up. The interviewer is assessing these qualities across <em>both</em> portions of the interview, not just the fit block.</div>
+        </div>
+        <p class="prose">Consulting is a highly interpersonal business, so firms genuinely care about this section. It's also the part you can control most: unlike a case, you know the questions in advance. Prepared, well-structured stories are one of the easiest ways to look ready. If you win the interviewer over during fit, the case tends to go more smoothly — they already want you to succeed.</p>
+        <div class="tip-box">
+          <div class="tip-box-label">Show, don't tell</div>
+          <div class="tip-box-text">Answer every behavioural question with a specific story, not a self-description. "I'm a strong leader" is telling. A 90-second story where your action changed the outcome is showing — and it's what interviewers remember.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY STRUCTURES -->
+    <section class="section" id="structures">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">Three Story Structures</div>
+          <div class="section-subtitle">Pick the one that fits your natural style — then use it consistently</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="prose">All three do the same job: keep your story tight, logical, and easy to follow. The differences are small. Learn one well rather than switching between them mid-interview.</p>
+        <div class="story-grid">
+
+          <div class="story-card">
+            <div class="story-card-name">STAR</div>
+            <div class="story-card-src">Wharton casebook</div>
+            <div class="story-letter"><span class="story-letter-badge">S</span><span class="story-letter-text"><strong>Situation</strong> — set up the problem or context</span></div>
+            <div class="story-letter"><span class="story-letter-badge">T</span><span class="story-letter-text"><strong>Task</strong> — what you were responsible for</span></div>
+            <div class="story-letter"><span class="story-letter-badge">A</span><span class="story-letter-text"><strong>Action</strong> — what you specifically did</span></div>
+            <div class="story-letter"><span class="story-letter-badge">R</span><span class="story-letter-text"><strong>Result</strong> — the outcome, impact, and what you learned</span></div>
+          </div>
+
+          <div class="story-card">
+            <div class="story-card-name">SCARF</div>
+            <div class="story-card-src">Wharton casebook</div>
+            <div class="story-letter"><span class="story-letter-badge">S</span><span class="story-letter-text"><strong>Situation</strong> — context and background</span></div>
+            <div class="story-letter"><span class="story-letter-badge">C</span><span class="story-letter-text"><strong>Complication</strong> — the tension or conflict</span></div>
+            <div class="story-letter"><span class="story-letter-badge">A</span><span class="story-letter-text"><strong>Action</strong> — what you did about it</span></div>
+            <div class="story-letter"><span class="story-letter-badge">R</span><span class="story-letter-text"><strong>Result</strong> — the outcome and impact</span></div>
+            <div class="story-letter"><span class="story-letter-badge">F</span><span class="story-letter-text"><strong>Future lessons</strong> — what you'd carry forward</span></div>
+          </div>
+
+          <div class="story-card">
+            <div class="story-card-name">H-SOAR-L</div>
+            <div class="story-card-src">Chicago Booth casebook</div>
+            <div class="story-letter"><span class="story-letter-badge">H</span><span class="story-letter-text"><strong>High-level overview</strong> — a one-line "headline" of the story and your role</span></div>
+            <div class="story-letter"><span class="story-letter-badge">S</span><span class="story-letter-text"><strong>Situation</strong> — context, in a sentence or two</span></div>
+            <div class="story-letter"><span class="story-letter-badge">O</span><span class="story-letter-text"><strong>Obstacle</strong> — the problem to be resolved</span></div>
+            <div class="story-letter"><span class="story-letter-badge">A</span><span class="story-letter-text"><strong>Action</strong> — spend most of your time here</span></div>
+            <div class="story-letter"><span class="story-letter-badge">R</span><span class="story-letter-text"><strong>Result</strong> — outcome and impact on team / client</span></div>
+            <div class="story-letter"><span class="story-letter-badge">L</span><span class="story-letter-text"><strong>Learning</strong> — what the experience taught you</span></div>
+          </div>
+
+        </div>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">Lead with the headline</div>
+          <div class="tip-box-text">Open with a "newspaper headline" sentence that tells the interviewer where the story is going, then fill in the details. This lets them follow your logic from the first sentence — the same answer-first habit that scores well in the case.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMING -->
+    <section class="section" id="timing">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Timing &amp; Time-Weighting</div>
+          <div class="section-subtitle">Where the seconds should actually go</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="prose">Aim for a full story in roughly <strong>90 to 120 seconds</strong> — long enough to show depth, short enough to stay sharp. The most common mistake is spending too long on setup and too little on what you actually did. Weight your time like this:</p>
+        <div class="weight-bar">
+          <div class="weight-seg" style="background:var(--navy-light);flex:15;"><span class="weight-label">Headline</span>~15%</div>
+          <div class="weight-seg" style="background:var(--navy-light);flex:15;"><span class="weight-label">Situation</span>~15%</div>
+          <div class="weight-seg" style="background:var(--accent);flex:55;"><span class="weight-label">Action</span>~55%</div>
+          <div class="weight-seg" style="background:var(--navy-light);flex:15;"><span class="weight-label">Result</span>~15%</div>
+        </div>
+        <div class="info-box" style="margin-bottom:0;margin-top:16px;">
+          <div class="info-box-label">Why action gets the majority</div>
+          <div class="info-box-text">The interviewer is scoring <em>your</em> judgement and behaviour, not the situation. Minimise time on context and obstacle; spend the bulk describing the specific actions <strong>you</strong> took and the decisions <strong>you</strong> made. Use "I" more than "we" — the team's win is nice, but your individual contribution is what's being assessed.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTION CATEGORIES -->
+    <section class="section" id="categories">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">The Six Question Categories</div>
+          <div class="section-subtitle">Nearly every behavioural question maps to one of these — prepare a story for each</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="cat-grid">
+
+          <div class="cat-card">
+            <div class="cat-card-head"><div class="cat-card-num">1</div><div class="cat-card-title">Individual Contribution</div></div>
+            <div class="cat-card-body">
+              <div class="cat-q">Tell me about your proudest accomplishment.</div>
+              <div class="cat-q">What are your top two strengths and two weaknesses?</div>
+              <div class="cat-q">You set an ambitious goal — how did you achieve it?</div>
+              <div class="cat-q">What's the biggest asset you'd bring to a project team?</div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-card-head"><div class="cat-card-num">2</div><div class="cat-card-title">Leadership / Management</div></div>
+            <div class="cat-card-body">
+              <div class="cat-q">A time you made an unpopular decision.</div>
+              <div class="cat-q">A time you managed a difficult team member or client.</div>
+              <div class="cat-q">You led a team through a difficult situation.</div>
+              <div class="cat-q">A time you gave someone negative feedback.</div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-card-head"><div class="cat-card-num">3</div><div class="cat-card-title">Persuasion / Influence</div></div>
+            <div class="cat-card-body">
+              <div class="cat-q">You convinced someone with an opposing viewpoint.</div>
+              <div class="cat-q">A disagreement with your manager.</div>
+              <div class="cat-q">How do you get buy-in from stakeholders?</div>
+              <div class="cat-q">The best presentation you've delivered.</div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-card-head"><div class="cat-card-num">4</div><div class="cat-card-title">Analytics / Problem Solving</div></div>
+            <div class="cat-card-body">
+              <div class="cat-q">A highly analytical project you worked on.</div>
+              <div class="cat-q">You used data and analytics to solve a problem.</div>
+              <div class="cat-q">A time you had to simplify complex technical data.</div>
+              <div class="cat-q">You used data to drive a conclusion — what did you assume?</div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-card-head"><div class="cat-card-num">5</div><div class="cat-card-title">Challenge / Failure</div></div>
+            <div class="cat-card-body">
+              <div class="cat-q">A time you overcame a significant obstacle.</div>
+              <div class="cat-q">You were wrong and someone had to convince you.</div>
+              <div class="cat-q">You navigated a hard situation under time pressure.</div>
+              <div class="cat-q">A time you failed to meet a deadline or goal.</div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-card-head"><div class="cat-card-num">6</div><div class="cat-card-title">Teamwork / Collaboration</div></div>
+            <div class="cat-card-body">
+              <div class="cat-q">A time you worked in a diverse or cross-cultural team.</div>
+              <div class="cat-q">You resolved conflict between teammates.</div>
+              <div class="cat-q">You supported a struggling colleague.</div>
+              <div class="cat-q">A time you had to compromise to move the team forward.</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">One story can cover several categories</div>
+          <div class="tip-box-text">A single strong story — say, turning around a stalled founder project — can answer leadership, persuasion, <em>and</em> challenge prompts with small reframing. You don't need 24 stories; you need 5–8 flexible ones you can angle toward the question asked.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CONSULTING / FIRM -->
+    <section class="section" id="motivation">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">"Why Consulting" &amp; "Why This Firm"</div>
+          <div class="section-subtitle">These aren't story questions — they need a different, tighter answer</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="prose">Resume walk-throughs and motivation questions don't need a story structure — keep them crisp and rehearsed. Three you should have polished cold:</p>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Walk me through your resume.</strong> A logical narrative: each move should explain the rationale behind the decision, ending with why consulting is the natural next step. Not a list of jobs — a through-line.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Why consulting?</strong> Tie it to your career progression and long-term goals. For a founder, the honest, strong version is usually about breadth of exposure, pattern recognition across industries, and building an operator's toolkit at pace.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Why this firm / this office?</strong> Give specific reasons — a practice area, the regional platform (e.g. the firm's Middle East / GCC presence), people you've spoken to. Generic answers that fit any firm read as unprepared.</div></li>
+        </ul>
+        <div class="info-box" style="margin-bottom:0;">
+          <div class="info-box-label">Make the networking count</div>
+          <div class="info-box-text">The strongest "why firm" answers name real conversations: "When I spoke with a partner in the Dubai office about their public-sector transformation work…" Specificity here is impossible to fake and signals genuine interest.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY BANK -->
+    <section class="section" id="bank">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div>
+          <div class="section-title">Build Your Story Bank</div>
+          <div class="section-subtitle">A single sheet mapping 5–8 stories to the qualities they demonstrate</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="prose">Keep a simple sheet with your top 5–8 stories, each written as a four-to-five-sentence outline in your chosen structure. Tag each with the qualities and categories it can cover, so in the interview you can instantly reach for the right one. Draft skeleton below — fill the last column with your own founder and MBA experiences (global / GCC framing):</p>
+        <div style="overflow:auto;border:1px solid var(--border);border-radius:12px;">
+          <table class="bank-table">
+            <thead>
+              <tr>
+                <th style="width:150px;">Story</th>
+                <th>Primary quality</th>
+                <th>Also covers</th>
+                <th style="width:150px;">Your example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>The turnaround</td><td>Leadership</td><td>Challenge · Persuasion</td><td>— fill in —</td></tr>
+              <tr><td>The hard sell</td><td>Persuasion / influence</td><td>Stakeholder buy-in</td><td>— fill in —</td></tr>
+              <tr><td>The data call</td><td>Analytics / problem solving</td><td>Individual contribution</td><td>— fill in —</td></tr>
+              <tr><td>The failure</td><td>Challenge / failure</td><td>Learning · Resilience</td><td>— fill in —</td></tr>
+              <tr><td>The team friction</td><td>Teamwork / collaboration</td><td>Cross-cultural work</td><td>— fill in —</td></tr>
+              <tr><td>The proud win</td><td>Individual contribution</td><td>Leadership</td><td>— fill in —</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip-box" style="margin-bottom:0;margin-top:16px;">
+          <div class="tip-box-label">Cover a range, not repeats</div>
+          <div class="tip-box-text">Make sure your set spans different situations and skills — leadership, teamwork, a difficult client, use of data, a genuine failure. If three of your stories are all "I led a team to a win," you have a gap the interviewer will find.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISTAKES -->
+    <section class="section" id="mistakes">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div>
+          <div class="section-title">Four Mistakes That Sink Fit Answers</div>
+          <div class="section-subtitle">Avoid these and you're already ahead of most candidates</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Telling instead of showing.</strong> "I'm collaborative" scores nothing. A specific story where your action produced a result scores everything.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Drowning in setup.</strong> Two minutes of context and ten seconds of action. Flip it — headline fast, then spend your time on what you did.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Hiding behind "we".</strong> The team's success is fine, but the interviewer is scoring you. Be explicit about your individual contribution.</div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Generic "why firm" answers.</strong> An answer that fits every firm equally reads as unprepared. Name the practice, the office, the people, the regional platform.</div></li>
+        </ul>
+        <div class="info-box" style="margin-bottom:0;">
+          <div class="info-box-label">A quiet failure signal</div>
+          <div class="info-box-text">Rambling and unstructured answers hurt you even when the content is good — because structure and concision are exactly the client-readiness skills the fit interview is designed to test.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK REFERENCE -->
+    <section class="section" id="quickref">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">Quick Reference — Fit Checklist</div>
+          <div class="section-subtitle">Read this the morning of the interview</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="quick-ref" style="margin-bottom:0;">
+          <div class="quick-ref-title">Fit Interview Standards</div>
+          <div class="quick-ref-list">
+            <div class="quick-ref-item"><span class="quick-ref-item-num">1</span><span>Open with a one-line headline so the interviewer knows where the story is going.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">2</span><span>Target 90–120 seconds per story — depth without rambling.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">3</span><span>Spend ~55% of the time on <em>your</em> actions; keep situation and obstacle brief.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">4</span><span>Say "I" more than "we" — your individual contribution is what's scored.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">5</span><span>Show, don't tell: every claim about yourself backed by a specific story.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">6</span><span>Close with the result <em>and</em> what you learned — impact plus self-awareness.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">7</span><span>Have "why consulting / why firm / why office" polished cold, with specifics.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">8</span><span>Bring 5–8 flexible stories that span leadership, teamwork, data, and a real failure.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  Sources: <strong>Wharton Consulting Club Casebook 2024–25</strong> (STAR / SCARF, question banks) + <strong>Chicago Booth MCG Casebook 2024–25</strong> (H-SOAR-L, timing, story-bank method) · Living document.
+</footer>
+
+<script>
+  const sidebarItems = document.querySelectorAll('.sidebar-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        const matchingLink = document.querySelector(`.sidebar-item[href="#${id}"]`);
+        if (matchingLink) {
+          sidebarItems.forEach(i => i.classList.remove('active'));
+          matchingLink.classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-80px 0px 0px 0px' });
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charts &amp; Exhibits — MBB Case Prep Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: white;
+    padding: 40px 2rem 32px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .page-hero-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+  .page-hero-icon {
+    width: 56px; height: 56px;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: var(--accent);
+    flex-shrink: 0;
+  }
+  .page-hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .page-hero-title { font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 4px; }
+  .page-hero-sub { font-size: 13px; color: var(--text-muted); }
+
+  /* ── CHART TYPE CARDS ── */
+  .chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+  .chart-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; border-top: 3px solid var(--navy);
+  }
+  .chart-card-head { padding: 12px 16px; display: flex; align-items: center; gap: 10px; background: var(--surface-card); border-bottom: 1px solid var(--border); }
+  .chart-card-icon { font-size: 20px; flex-shrink: 0; }
+  .chart-card-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .chart-card-body { padding: 12px 16px; }
+  .chart-card-what { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px; }
+  .chart-card-look { font-size: 11.5px; color: var(--text-secondary); line-height: 1.45; padding-left: 14px; position: relative; }
+  .chart-card-look::before { content: '👁'; position: absolute; left: 0; top: 0; font-size: 10px; }
+  .chart-card-look strong { color: var(--text-primary); font-weight: 600; }
+
+  /* ── MINI WATERFALL (worked example, pure CSS) ── */
+  .wf { display: flex; align-items: flex-end; gap: 10px; height: 200px; padding: 16px 8px 0; border-bottom: 2px solid var(--border-strong); margin-bottom: 6px; }
+  .wf-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; position: relative; }
+  .wf-bar { width: 100%; border-radius: 4px 4px 0 0; position: relative; }
+  .wf-val { position: absolute; top: -18px; left: 0; right: 0; text-align: center; font-size: 10px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--text-primary); }
+  .wf-label { font-size: 9.5px; color: var(--text-muted); text-align: center; margin-top: 6px; line-height: 1.2; }
+  .wf-spacer { width: 100%; }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 28px 1.25rem 24px; }
+    .page-hero-icon { width: 44px; height: 44px; font-size: 20px; border-radius: 11px; }
+    .page-hero-title { font-size: 20px; }
+    .page-hero-sub { font-size: 12px; }
+    .chart-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .page-hero-inner { gap: 12px; }
+    .page-hero-icon { width: 38px; height: 38px; font-size: 17px; }
+    .page-hero-title { font-size: 17px; }
+    .page-hero-eyebrow { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-brand">
+      <div>
+        <div class="brand-text">Case Prep Hub</div>
+        <div class="brand-sub">Vishnu's Personal Reference</div>
+      </div>
+    </a>
+    <nav class="nav-pills">
+      <a href="index.html" class="nav-pill">Home</a>
+      <a href="case-steps.html" class="nav-pill">7-Step Structure</a>
+      <a href="case-types.html" class="nav-pill">9 Case Types</a>
+      <a href="frameworks.html" class="nav-pill">Frameworks</a>
+      <a href="quant.html" class="nav-pill">Quant &amp; Formulas</a>
+      <a href="charts.html" class="nav-pill active">Charts</a>
+      <a href="fit.html" class="nav-pill">Fit Interview</a>
+      <a href="gcc-data.html" class="nav-pill">GCC Data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-icon">📊</div>
+    <div>
+      <div class="page-hero-eyebrow">Exhibit Interpretation</div>
+      <div class="page-hero-title">Charts &amp; Exhibits</div>
+      <div class="page-hero-sub">Reading a chart under pressure is a scored skill of its own — separate from the mental maths.</div>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-header">Charts &amp; Exhibits</div>
+      <a href="#why" class="sidebar-item"><span class="sidebar-num">★</span> Why It Matters</a>
+      <a href="#steps" class="sidebar-item"><span class="sidebar-num">1</span> The 5-Step Read</a>
+      <a href="#types" class="sidebar-item"><span class="sidebar-num">2</span> Chart Types</a>
+      <a href="#example" class="sidebar-item"><span class="sidebar-num">3</span> Worked Example</a>
+      <a href="#mistakes" class="sidebar-item"><span class="sidebar-num">4</span> 4 Mistakes</a>
+      <a href="#quickref" class="sidebar-item"><span class="sidebar-num">★</span> Quick Ref</a>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- WHY -->
+    <section class="section" id="why">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">Why Exhibits Are Their Own Skill</div>
+          <div class="section-subtitle">The interviewer is watching you extract insight — not read numbers aloud</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="info-box">
+          <div class="info-box-label">What clearing a chart actually tests</div>
+          <div class="info-box-text">Mid-case, the interviewer slides an exhibit across the table. They're testing whether you can <strong>orient quickly, find the story in the data, and say what it means for the client</strong> — under time pressure. Reading the numbers back is table stakes; the score comes from the "so what".</div>
+        </div>
+        <p class="prose">This is distinct from the mental maths on the Quant page. There, you're calculating. Here, you're interpreting — deciding what the chart is telling you and how it moves the case forward. Strong candidates treat every exhibit as evidence for or against their hypothesis, not as a standalone puzzle.</p>
+      </div>
+    </section>
+
+    <!-- 5-STEP READ -->
+    <section class="section" id="steps">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">The 5-Step Chart Read</div>
+          <div class="section-subtitle">A repeatable sequence for clearing any exhibit</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Orient before you analyse.</strong> Read the title, then the axes, units, legend, and time period — out loud, briefly. Getting the units wrong (millions vs thousands, % vs absolute) is the fastest way to derail. Take five seconds here before saying anything about the data.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Describe what you see.</strong> State the high-level pattern: the trend, the biggest bar, the outlier, the crossover point. "Revenue grew steadily until 2023, then dropped sharply" — one clean sentence.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Pull the specific insight.</strong> Go one level deeper into the driver: which segment, which year, which competitor is responsible for the pattern you just named.</div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Link it to the case.</strong> Connect the exhibit to information you already have and to your hypothesis. Offer a second-order insight — what this implies when combined with what you learned earlier.</div></li>
+          <li class="num-item"><span class="num-badge">5</span><div class="num-text"><strong>Finish with the "so what".</strong> End on the implication for the client: what should they do differently because of what this chart shows? Never end on the number alone.</div></li>
+        </ul>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">Silence is fine — briefly</div>
+          <div class="tip-box-text">It's expected to take 15–30 seconds to study an exhibit before speaking. Take the moment to orient properly rather than narrating confusedly in real time. Then deliver a structured read, not a stream of consciousness.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHART TYPES -->
+    <section class="section" id="types">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">The Chart Types You'll Face</div>
+          <div class="section-subtitle">Know each one cold so orientation is instant</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="chart-grid">
+
+          <div class="chart-card">
+            <div class="chart-card-head"><span class="chart-card-icon">🧱</span><div class="chart-card-title">Marimekko ("Mekko")</div></div>
+            <div class="chart-card-body">
+              <div class="chart-card-what">A stacked bar where <em>both</em> width and height carry data — column width = segment/market size, stack height = share within that segment.</div>
+              <div class="chart-card-look"><strong>Look for:</strong> area = width × height. A tall slice in a narrow column can be smaller in absolute terms than a short slice in a wide one.</div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-head"><span class="chart-card-icon">💧</span><div class="chart-card-title">Waterfall</div></div>
+            <div class="chart-card-body">
+              <div class="chart-card-what">Shows how you get from a starting value to an ending value through a series of positive and negative steps.</div>
+              <div class="chart-card-look"><strong>Look for:</strong> the largest single bar — that's the biggest driver of the change, and usually where the case is heading.</div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-head"><span class="chart-card-icon">📚</span><div class="chart-card-title">Stacked &amp; Clustered Bars</div></div>
+            <div class="chart-card-body">
+              <div class="chart-card-what">Stacked = composition of a total over time. Clustered = side-by-side comparison across categories or years.</div>
+              <div class="chart-card-look"><strong>Look for:</strong> which segment is growing vs shrinking as a share of the whole — mix shift is often the real insight.</div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-head"><span class="chart-card-icon">🫧</span><div class="chart-card-title">Bubble / Scatter</div></div>
+            <div class="chart-card-body">
+              <div class="chart-card-what">Two axes plus bubble size = three variables at once (e.g. growth vs margin, sized by revenue).</div>
+              <div class="chart-card-look"><strong>Look for:</strong> the outliers and the quadrant each point sits in — top-right winners, bottom-left laggards.</div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-head"><span class="chart-card-icon">📈</span><div class="chart-card-title">Line / Trend</div></div>
+            <div class="chart-card-body">
+              <div class="chart-card-what">A metric over time, often several series compared on the same axes.</div>
+              <div class="chart-card-look"><strong>Look for:</strong> inflection points and crossovers — <em>when</em> the trend changed matters as much as the direction.</div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-head"><span class="chart-card-icon">🔢</span><div class="chart-card-title">Data Table</div></div>
+            <div class="chart-card-body">
+              <div class="chart-card-what">Rows and columns of raw figures — the interviewer wants you to find the signal yourself.</div>
+              <div class="chart-card-look"><strong>Look for:</strong> compute a ratio or growth rate the table doesn't hand you — that's usually the point of giving you a table.</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="info-box" style="margin-bottom:0;">
+          <div class="info-box-label">Two habits before touching the numbers</div>
+          <div class="info-box-text"><strong>External to the chart:</strong> title, headers, footnotes, axes, units. <strong>Internal to the chart:</strong> segment sizes, totals, and what each dimension encodes. Do the external scan first — the footnote often changes everything (e.g. "excludes duty-free" or "constant 2024 currency").</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKED EXAMPLE -->
+    <section class="section" id="example">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">Worked Example — Revenue Waterfall</div>
+          <div class="section-subtitle">Clearing an exhibit end-to-end using the 5 steps</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="case-prompt">
+          <div class="case-prompt-speaker">Exhibit handed to you</div>
+          <div class="case-prompt-text">"A European grocery retailer's operating profit fell from €800m to €500m in one year. This waterfall shows what changed."</div>
+        </div>
+
+        <div class="wf">
+          <div class="wf-col">
+            <div class="wf-bar" style="height:80%;background:var(--navy-light);"><div class="wf-val">€800m</div></div>
+            <div class="wf-label">FY23<br>profit</div>
+          </div>
+          <div class="wf-col">
+            <div class="wf-spacer" style="height:20%;"></div>
+            <div class="wf-bar" style="height:18%;background:var(--accent-light);"><div class="wf-val">+€180m</div></div>
+            <div class="wf-label">Volume<br>growth</div>
+          </div>
+          <div class="wf-col">
+            <div class="wf-spacer" style="height:8%;"></div>
+            <div class="wf-bar" style="height:30%;background:var(--accent);"><div class="wf-val">−€300m</div></div>
+            <div class="wf-label">Input<br>cost ↑</div>
+          </div>
+          <div class="wf-col">
+            <div class="wf-spacer" style="height:20%;"></div>
+            <div class="wf-bar" style="height:18%;background:var(--accent);"><div class="wf-val">−€180m</div></div>
+            <div class="wf-label">Price<br>investment</div>
+          </div>
+          <div class="wf-col">
+            <div class="wf-bar" style="height:50%;background:var(--navy-light);"><div class="wf-val">€500m</div></div>
+            <div class="wf-label">FY24<br>profit</div>
+          </div>
+        </div>
+
+        <div class="section-label">Clearing it with the 5 steps</div>
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Orient.</strong> "This is a profit bridge in euros, millions, from FY23 to FY24. Four movements: one positive, three negative."</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Describe.</strong> "Profit fell €300m overall. Volume growth added €180m, but that was more than wiped out by cost and pricing effects."</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Specific insight.</strong> "The single biggest driver is a €300m rise in input costs — larger than any other bar, and larger than the entire volume gain."</div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Link.</strong> "Combined with the price investment of €180m, this tells me the client cut prices to defend volume while their costs were rising — a margin squeeze from both sides."</div></li>
+          <li class="num-item"><span class="num-badge">5</span><div class="num-text"><strong>So what.</strong> "So the priority isn't selling more — volume is already up. It's the cost base: I'd dig into what drove the €300m input-cost increase and whether the price cuts actually protected share."</div></li>
+        </ul>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">The move that scores</div>
+          <div class="tip-box-text">A weak candidate says "profit went from 800 to 500." A strong one lands on "the cost base is the problem, not volume — here's where I'd look next." Same chart, completely different signal to the interviewer.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISTAKES -->
+    <section class="section" id="mistakes">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">Four Mistakes That Sink Exhibit Reads</div>
+          <div class="section-subtitle">Each one is visible to the interviewer in seconds</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Diving into numbers before reading axes and units.</strong> Get the units wrong once and every conclusion that follows is wrong. Orient first, always.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Reading data without extracting insight.</strong> Narrating every value with no synthesis signals you can't see the forest. Name the pattern, then the driver.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Ignoring the footnotes.</strong> "Excludes X," "constant currency," "estimated" — these routinely change the interpretation and are placed there on purpose.</div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Not tying back to the question.</strong> An insight that doesn't connect to the client's problem is trivia. Always close with the implication for the case.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- QUICK REF -->
+    <section class="section" id="quickref">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">Quick Reference — Exhibit Checklist</div>
+          <div class="section-subtitle">Run this sequence the moment a chart appears</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="quick-ref" style="margin-bottom:0;">
+          <div class="quick-ref-title">Chart-Clearing Standards</div>
+          <div class="quick-ref-list">
+            <div class="quick-ref-item"><span class="quick-ref-item-num">1</span><span>Read title, axes, units, legend, and time period <em>before</em> analysing.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">2</span><span>Check footnotes — they often change the interpretation.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">3</span><span>Name the high-level pattern in one clean sentence.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">4</span><span>Go one level deeper: which segment / year / driver explains it.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">5</span><span>Link to prior information and your hypothesis; offer a second-order insight.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">6</span><span>On a Mekko, remember area = width × height, not height alone.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">7</span><span>On a table, compute the ratio or growth rate it doesn't give you.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">8</span><span>Always close with the "so what" for the client — never end on a number.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  Sources: <strong>Chicago Booth MCG Casebook 2024–25</strong> (chart-clearing steps &amp; chart types) + <strong>Wharton Consulting Club Casebook 2024–25</strong> (chart drills) · Living document.
+</footer>
+
+<script>
+  const sidebarItems = document.querySelectorAll('.sidebar-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        const matchingLink = document.querySelector(`.sidebar-item[href="#${id}"]`);
+        if (matchingLink) {
+          sidebarItems.forEach(i => i.classList.remove('active'));
+          matchingLink.classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-80px 0px 0px 0px' });
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

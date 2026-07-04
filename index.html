@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBB Case Prep Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .hero {
+    background: white;
+    padding: 56px 2rem 48px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .hero-badge {
+    background: var(--accent-pale);
+    border: 1px solid var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .home-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .home-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,26,26,0.12);
+    border-color: var(--accent);
+  }
+  .home-card-header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 20px 16px;
+  }
+  .home-card-icon {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .home-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .home-card-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .home-card-body {
+    padding: 16px 20px;
+    flex: 1;
+  }
+  .home-card-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .home-card-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .home-card-pill {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .home-card-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .home-card-footer span { font-size: 16px; transition: transform 0.15s; }
+  .home-card:hover .home-card-footer span { transform: translateX(4px); }
+
+  .coming-soon {
+    opacity: 0.65;
+    cursor: default;
+  }
+  .coming-soon:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+  .coming-tag {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--accent-pale);
+    color: #8A0E22;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid #E0374F;
+  }
+
+  .progress-bar-wrap {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 2rem;
+  }
+  .progress-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .progress-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .progress-steps {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+  .progress-step {
+    text-align: center;
+  }
+  .progress-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .progress-dot.done { background: white; border: 2px solid var(--accent); color: var(--accent); }
+  .progress-dot.todo { background: var(--border); color: var(--text-muted); }
+  .progress-step-label { font-size: 9px; color: var(--text-muted); line-height: 1.3; }
+
+  .source-strip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .source-icon { font-size: 20px; flex-shrink: 0; }
+  .source-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .source-text strong { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .home-grid { grid-template-columns: 1fr; }
+    .progress-steps { grid-template-columns: repeat(3, 1fr); }
+    .hero-title { font-size: 26px; }
+  }
+  @media (max-width: 480px) {
+    .hero { padding: 40px 1.25rem 32px; }
+    .hero-title { font-size: 22px; }
+    .hero-sub { font-size: 13.5px; }
+    .progress-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-brand">
+      <div>
+        <div class="brand-text">Case Prep Hub</div>
+        <div class="brand-sub">Vishnu's Personal Reference</div>
+      </div>
+    </a>
+    <nav class="nav-pills">
+      <a href="index.html" class="nav-pill active">Home</a>
+      <a href="case-steps.html" class="nav-pill">7-Step Structure</a>
+      <a href="case-types.html" class="nav-pill">9 Case Types</a>
+      <a href="frameworks.html" class="nav-pill">Frameworks</a>
+      <a href="quant.html" class="nav-pill">Quant &amp; Formulas</a>
+      <a href="charts.html" class="nav-pill">Charts</a>
+      <a href="fit.html" class="nav-pill">Fit Interview</a>
+      <a href="gcc-data.html" class="nav-pill">GCC Data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <h1 class="hero-title">Your Case Interview Prep Hub</h1>
+  <p class="hero-sub">A living reference built from Taylor Warfield's content. Add new pages as you learn. Review before every mock case.</p>
+</div>
+
+<div class="full-layout">
+
+  <div class="progress-bar-wrap" style="margin-top: 1.5rem;">
+    <div class="progress-title">Case interview progress tracker — 7 steps</div>
+    <div class="progress-steps">
+      <div class="progress-step">
+        <div class="progress-dot done">1</div>
+        <div class="progress-step-label">Case Background</div>
+      </div>
+      <div class="progress-step">
+        <div class="progress-dot done">2</div>
+        <div class="progress-step-label">Clarifying Questions</div>
+      </div>
+      <div class="progress-step">
+        <div class="progress-dot done">3</div>
+        <div class="progress-step-label">Framework</div>
+      </div>
+      <div class="progress-step">
+        <div class="progress-dot done">4</div>
+        <div class="progress-step-label">Starting the Case</div>
+      </div>
+      <div class="progress-step">
+        <div class="progress-dot done">5</div>
+        <div class="progress-step-label">Quant Problems</div>
+      </div>
+      <div class="progress-step">
+        <div class="progress-dot done">6</div>
+        <div class="progress-step-label">Qualitative Q's</div>
+      </div>
+      <div class="progress-step">
+        <div class="progress-dot done">7</div>
+        <div class="progress-step-label">Recommendation</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-grid">
+
+    <a href="case-steps.html" class="home-card">
+      <div class="home-card-header">
+        <div class="home-card-icon">📋</div>
+        <div class="home-card-title">7-Step Case Structure</div>
+        <div class="home-card-tag">Core foundation</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">The complete end-to-end case interview structure. From hearing the prompt to delivering your recommendation. Built from Taylor Warfield's YouTube + Lessons 1–3.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">Case synthesis</span>
+          <span class="home-card-pill">Clarifying Qs</span>
+          <span class="home-card-pill">Frameworks</span>
+          <span class="home-card-pill">MECE</span>
+          <span class="home-card-pill">Quant</span>
+          <span class="home-card-pill">Recommendation</span>
+        </div>
+      </div>
+      <div class="home-card-footer">Open section <span>→</span></div>
+    </a>
+
+    <a href="case-types.html" class="home-card">
+      <div class="home-card-header">
+        <div class="home-card-icon">🗂️</div>
+        <div class="home-card-title">9 Case Types &amp; Frameworks</div>
+        <div class="home-card-tag">Framework reference</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">Every framework with all bucket sub-questions. The six core types — Profitability, Market Entry, Growth, Pricing, M&amp;A, New Product — plus Cost Reduction, Due Diligence, and Unconventional cases, each with a comparison table and tips.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">Profitability</span>
+          <span class="home-card-pill">Market entry</span>
+          <span class="home-card-pill">Growth tree</span>
+          <span class="home-card-pill">Pricing</span>
+          <span class="home-card-pill">M&amp;A</span>
+          <span class="home-card-pill">Cost reduction</span>
+          <span class="home-card-pill">Due diligence</span>
+          <span class="home-card-pill">Unconventional</span>
+        </div>
+      </div>
+      <div class="home-card-footer">Open section <span>→</span></div>
+    </a>
+
+    <a href="frameworks.html" class="home-card">
+      <div class="home-card-header">
+        <div class="home-card-icon">🧠</div>
+        <div class="home-card-title">Frameworks &amp; Market Sizing</div>
+        <div class="home-card-tag">Framework reference</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">The five-step market sizing method with two worked examples and anchor numbers — now joined by a full strategy &amp; marketing library: TAM/SAM/SOM, Porter's Five Forces, Value Chain, BCG, Ansoff, PESTEL, SWOT, VRIO, and the 5C / 4P / 4A / STP set.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">Market sizing</span>
+          <span class="home-card-pill">TAM/SAM/SOM</span>
+          <span class="home-card-pill">Porter's 5 Forces</span>
+          <span class="home-card-pill">BCG · Ansoff</span>
+          <span class="home-card-pill">PESTEL · SWOT</span>
+          <span class="home-card-pill">5C · 4P · 4A · STP</span>
+        </div>
+      </div>
+      <div class="home-card-footer">Open section <span>→</span></div>
+    </a>
+
+    <a href="quant.html" class="home-card">
+      <div class="home-card-header">
+        <div class="home-card-icon">🔢</div>
+        <div class="home-card-title">Quant, Formulas &amp; Mental Math</div>
+        <div class="home-card-tag">Skill drill</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">The K/M/B/T trick to cut math errors in half, plus the profit, investment, operations, market-share, and finance formulas you're expected to recall cold under pressure.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">K/M/B/T trick</span>
+          <span class="home-card-pill">Profit formulas</span>
+          <span class="home-card-pill">Investment · ROI</span>
+          <span class="home-card-pill">Market share</span>
+        </div>
+      </div>
+      <div class="home-card-footer">Open section <span>→</span></div>
+    </a>
+
+    <a href="charts.html" class="home-card">
+      <div class="home-card-header">
+        <div class="home-card-icon">📊</div>
+        <div class="home-card-title">Charts &amp; Exhibits</div>
+        <div class="home-card-tag">Skill drill</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">Reading an exhibit under pressure is a scored skill of its own. The five-step chart read, the chart types you'll face, a worked waterfall, and the mistakes that sink exhibit reads.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">5-step read</span>
+          <span class="home-card-pill">Mekko · waterfall</span>
+          <span class="home-card-pill">Scatter · bars</span>
+          <span class="home-card-pill">"So what"</span>
+        </div>
+      </div>
+      <div class="home-card-footer">Open section <span>→</span></div>
+    </a>
+
+    <a href="fit.html" class="home-card">
+      <div class="home-card-header">
+        <div class="home-card-icon">💬</div>
+        <div class="home-card-title">Fit &amp; Behavioural Interview</div>
+        <div class="home-card-tag">Half the interview</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">Roughly half of every MBB interview is fit. Story structures (STAR / SCARF / H-SOAR-L), timing, the six question categories, a story-bank template, and the mistakes to avoid.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">STAR · SCARF · H-SOAR-L</span>
+          <span class="home-card-pill">Question banks</span>
+          <span class="home-card-pill">Story bank</span>
+          <span class="home-card-pill">Why consulting / firm</span>
+        </div>
+      </div>
+      <div class="home-card-footer">Open section <span>→</span></div>
+    </a>
+
+    <a href="gcc-data.html" class="home-card">
+      <div class="home-card-header">
+        <div class="home-card-icon">🌍</div>
+        <div class="home-card-title">GCC Market Sizing Data</div>
+        <div class="home-card-tag">Verified fact base</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">Population, household, and income anchors for all six GCC countries plus Dubai and Abu Dhabi deep dives — sourced from official statistics bodies, with confidence tiers and footnotes on every unverified figure.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">Anchor card</span>
+          <span class="home-card-pill">Nationals vs expats</span>
+          <span class="home-card-pill">Household income</span>
+          <span class="home-card-pill">GDP anchors</span>
+        </div>
+      </div>
+      <div class="home-card-footer">Open section <span>→</span></div>
+    </a>
+
+    <div class="home-card coming-soon">
+      <div class="home-card-header">
+        <div class="home-card-icon">➕</div>
+        <div class="home-card-title">Add New Page</div>
+        <div class="home-card-tag">Your next prompt</div>
+      </div>
+      <div class="home-card-body">
+        <div class="home-card-desc">Share a YouTube video or email lessons and a new section will be built and added here. This site grows as your prep grows.</div>
+        <div class="home-card-pills">
+          <span class="home-card-pill">Industry primers</span>
+          <span class="home-card-pill">Pricing deep dive</span>
+          <span class="home-card-pill">Full practice cases</span>
+          <span class="home-card-pill">Synthesis drills</span>
+        </div>
+      </div>
+      <div class="home-card-footer" style="color: var(--text-muted);">Share content to unlock <span style="color:var(--text-muted)">+</span></div>
+    </div>
+
+  </div>
+
+  <div class="source-strip">
+    <div class="source-icon">📧</div>
+    <div class="source-text">
+      <strong>Source: Hacking the Case Interview</strong> — Taylor Warfield (ex-Bain) ·
+      YouTube series "Learn Case Interviews in Under 30 Minutes" + Daily email lessons 1–3 ·
+      Living document — add new lessons as they arrive.
+    </div>
+  </div>
+
+  <div class="quick-ref" style="border-radius:12px;">
+    <div class="quick-ref-title">10 Non-Negotiable Principles — Read Before Every Mock Case</div>
+    <div class="quick-ref-list">
+      <div class="quick-ref-item"><span class="quick-ref-item-num">1</span><span>Synthesise the case with enthusiasm, no filler words, and one clean sentence per key fact. A Bain interviewer can tell in 2 minutes.</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">2</span><span>One clarifying question: <em>"Do we have a specific, measurable target for [goal]?"</em> You get zero points for more.</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">3</span><span>Build frameworks by reverse-engineering: "What 4 things need to be true to confidently say yes?" = A+ framework.</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">4</span><span>Every framework must be MECE. Use X / Not-X pairs as a guaranteed shortcut when stuck.</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">5</span><span>Always signal structure before content: "I'll approach this through two lenses: X and Y."</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">6</span><span>Hypothesize before you analyze. Drive the case — don't wait to be led.</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">7</span><span>Synthesise data, don't just repeat it. "3% growth annually supports the entry hypothesis."</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">8</span><span>For quant: state assumptions aloud → show logic → round → sanity-check. Logic matters more than arithmetic.</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">9</span><span>Recommendation = 3 evidence-backed reasons + 2 concrete next steps. Be direct.</span></div>
+      <div class="quick-ref-item"><span class="quick-ref-item-num">10</span><span>Never say "it depends" without specifying what it depends on and why it changes your answer.</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  Sources: <strong>"Learn Case Interviews in Under 30 Minutes"</strong> (YouTube) + <strong>Daily Email Series — Lessons 1–3</strong> — Hacking the Case Interview (Taylor Warfield, ex-Bain) · Living document.
+</footer>
+
+</body>
+</html>

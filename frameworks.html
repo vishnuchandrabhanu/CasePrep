@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frameworks &amp; Market Sizing — MBB Case Prep Hub</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* ── PAGE HERO (matches quant.html pattern) ── */
+  .page-hero {
+    background: white;
+    padding: 40px 2rem 32px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .page-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .page-hero-icon {
+    width: 56px; height: 56px;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: var(--accent);
+    flex-shrink: 0;
+  }
+  .page-hero-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 4px;
+  }
+  .page-hero-title { font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 4px; }
+  .page-hero-sub { font-size: 13px; color: var(--text-muted); }
+
+  /* ── APPROACH COMPARISON CARDS ── */
+  .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .approach-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .approach-card.alt { border-top-color: var(--navy); }
+  .approach-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .approach-text { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
+  .approach-example { font-size: 11.5px; color: var(--text-muted); line-height: 1.5; font-style: italic; }
+
+  /* ── ANCHOR / REPLACEMENT CARD GRID ── */
+  .anchor-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+  .anchor-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 14px;
+    text-align: center;
+  }
+  .anchor-value { font-size: 17px; font-weight: 700; color: var(--navy); font-family: 'JetBrains Mono', monospace; margin-bottom: 4px; }
+  .anchor-label { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
+
+  /* ── CALCULATION CHAIN ── */
+  .calc-chain { display: flex; flex-direction: column; margin-bottom: 4px; }
+  .calc-step {
+    display: grid;
+    grid-template-columns: 30px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    margin-bottom: 6px;
+  }
+  .calc-step-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .calc-step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .calc-step-text strong { color: var(--text-primary); font-weight: 600; }
+  .calc-step-value { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: var(--navy); white-space: nowrap; text-align: right; }
+  .calc-result {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .calc-result-label { font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); }
+  .calc-result-value { font-size: 22px; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+
+  /* ── SANITY CHECK BOX ── */
+  .sanity-box {
+    background: var(--green-bg);
+    border: 1px solid #90D4A0;
+    border-left: 4px solid var(--green);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+  .sanity-label { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--green); margin-bottom: 6px; }
+  .sanity-text { font-size: 13px; color: #14512F; line-height: 1.6; }
+  .sanity-text ul { margin: 4px 0 0 18px; padding: 0; }
+  .sanity-text li { margin-bottom: 2px; }
+
+  /* ── COMING SOON LIST (for remaining frameworks) ── */
+  .coming-list { display: flex; flex-direction: column; gap: 10px; }
+  .coming-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .coming-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .coming-item.done { background: var(--green-bg); border-color: #90D4A0; }
+  .coming-item.done .coming-dot { background: var(--green); }
+
+  /* ── TAM / SAM / SOM FUNNEL ── */
+  .funnel { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 16px; }
+  .funnel-tier {
+    color: white; border-radius: 10px; padding: 14px 18px; text-align: center;
+  }
+  .funnel-tier-name { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+  .funnel-tier-desc { font-size: 11.5px; opacity: 0.85; margin-top: 3px; line-height: 1.4; }
+  .funnel-t1 { width: 100%; background: var(--navy-light); }
+  .funnel-t2 { width: 74%; background: var(--accent-light); }
+  .funnel-t3 { width: 48%; background: var(--accent); }
+
+  /* ── 2×2 MATRIX ── */
+  .matrix-wrap { display: grid; grid-template-columns: 90px 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: 6px; margin-bottom: 16px; }
+  .matrix-corner { }
+  .matrix-col-label, .matrix-row-label {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    color: var(--text-muted); padding: 4px;
+  }
+  .matrix-row-label { writing-mode: vertical-rl; transform: rotate(180deg); }
+  .matrix-cell { border-radius: 10px; padding: 14px; color: var(--navy); min-height: 92px; background: white; border: 1px solid var(--border); }
+  .matrix-cell-title { font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+  .matrix-cell-desc { font-size: 11px; line-height: 1.4; opacity: 0.9; }
+
+  /* ── VALUE CHAIN FLOW ── */
+  .chain-flow { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; align-items: stretch; }
+  .chain-link {
+    flex: 1; min-width: 92px; background: white; border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 8px;
+    padding: 10px 8px; text-align: center; display: flex; flex-direction: column; gap: 4px; justify-content: center;
+  }
+  .chain-link-name { font-size: 11px; font-weight: 600; color: var(--navy); line-height: 1.25; }
+  .chain-link-sub { font-size: 9.5px; color: var(--text-muted); line-height: 1.3; }
+  .chain-arrow { display: flex; align-items: center; color: var(--accent); font-size: 14px; }
+
+  /* ── FORCES / VRIO STEP ── */
+  .vrio-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .vrio-step { background: white; border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: 10px; padding: 12px; text-align: center; }
+  .vrio-letter { font-size: 18px; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+  .vrio-word { font-size: 11px; font-weight: 600; color: var(--navy); margin: 2px 0 4px; }
+  .vrio-q { font-size: 10px; color: var(--text-muted); line-height: 1.3; }
+
+  /* ── GROUP LABEL inside sidebar (spacing between stacked cards) ── */
+  .sidebar-card + .sidebar-card { margin-top: 14px; }
+
+  @media (max-width: 900px) {
+    .page-hero { padding: 28px 1.25rem 24px; }
+    .page-hero-icon { width: 44px; height: 44px; font-size: 20px; border-radius: 11px; }
+    .page-hero-title { font-size: 20px; }
+    .page-hero-sub { font-size: 12px; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .anchor-grid { grid-template-columns: repeat(2, 1fr); }
+    .calc-step { grid-template-columns: 26px 1fr; }
+    .calc-step-value { text-align: left; grid-column: 2 / 3; }
+    .vrio-flow { grid-template-columns: repeat(2, 1fr); }
+    .matrix-wrap { grid-template-columns: 60px 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .anchor-grid { grid-template-columns: 1fr 1fr; }
+    .vrio-flow { grid-template-columns: 1fr; }
+    .matrix-wrap { grid-template-columns: 44px 1fr 1fr; gap: 4px; }
+    .matrix-cell { padding: 10px; min-height: 76px; }
+    .matrix-cell-title { font-size: 12px; }
+    .matrix-cell-desc { font-size: 10px; }
+    .matrix-col-label, .matrix-row-label { font-size: 8.5px; }
+    .chain-flow { gap: 4px; }
+    .chain-link { min-width: 78px; padding: 8px 6px; }
+    .funnel-tier { padding: 12px 14px; }
+    .framework-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 420px) {
+    .framework-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .page-hero-inner { gap: 12px; }
+    .page-hero-icon { width: 38px; height: 38px; font-size: 17px; }
+    .page-hero-title { font-size: 17px; }
+    .page-hero-eyebrow { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-brand">
+      <div>
+        <div class="brand-text">Case Prep Hub</div>
+        <div class="brand-sub">Vishnu's Personal Reference</div>
+      </div>
+    </a>
+    <nav class="nav-pills">
+      <a href="index.html" class="nav-pill">Home</a>
+      <a href="case-steps.html" class="nav-pill">7-Step Structure</a>
+      <a href="case-types.html" class="nav-pill">9 Case Types</a>
+      <a href="frameworks.html" class="nav-pill active">Frameworks</a>
+      <a href="quant.html" class="nav-pill">Quant &amp; Formulas</a>
+      <a href="charts.html" class="nav-pill">Charts</a>
+      <a href="fit.html" class="nav-pill">Fit Interview</a>
+      <a href="gcc-data.html" class="nav-pill">GCC Data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-icon">🧠</div>
+    <div>
+      <div class="page-hero-eyebrow">Frameworks Deep Dive</div>
+      <div class="page-hero-title">Frameworks &amp; Market Sizing</div>
+      <div class="page-hero-sub">The five-step market-sizing method, plus a working library of the strategy and marketing frameworks that show up inside cases.</div>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-header">Market Sizing</div>
+      <a href="#overview" class="sidebar-item"><span class="sidebar-num">★</span> Overview</a>
+      <a href="#framework" class="sidebar-item"><span class="sidebar-num">1</span> 5-Step Framework</a>
+      <a href="#anchors" class="sidebar-item"><span class="sidebar-num">2</span> Anchors &amp; Cycles</a>
+      <a href="#mistakes" class="sidebar-item"><span class="sidebar-num">3</span> 3 Mistakes</a>
+      <a href="#example1" class="sidebar-item"><span class="sidebar-num">4</span> Toothbrush Example</a>
+      <a href="#example2" class="sidebar-item"><span class="sidebar-num">5</span> Insurance Example</a>
+      <a href="#quickref" class="sidebar-item"><span class="sidebar-num">★</span> Quick Ref</a>
+      <a href="#tamsamsom" class="sidebar-item"><span class="sidebar-num">▸</span> TAM / SAM / SOM</a>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-header">Strategy Frameworks</div>
+      <a href="#porter" class="sidebar-item"><span class="sidebar-num">▸</span> Porter's 5 Forces</a>
+      <a href="#corestrategy" class="sidebar-item"><span class="sidebar-num">▸</span> Value Chain · BCG · Ansoff</a>
+      <a href="#envscan" class="sidebar-item"><span class="sidebar-num">▸</span> PESTEL &amp; SWOT</a>
+      <a href="#moat" class="sidebar-item"><span class="sidebar-num">▸</span> VRIO &amp; the Moat</a>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-header">Marketing Frameworks</div>
+      <a href="#marketing" class="sidebar-item"><span class="sidebar-num">▸</span> 5C · 4P · 4A · STP</a>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- OVERVIEW -->
+    <section class="section" id="overview">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">Market Sizing: Why It Matters</div>
+          <div class="section-subtitle">A repeatable framework for any estimation question — from Taylor Warfield's "Learn Case Interviews in Under 30 Minutes"</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="info-box">
+          <div class="info-box-label">What market sizing actually tests</div>
+          <div class="info-box-text">Market sizing questions ask you to estimate <strong>annual dollar spending</strong> on a product or service — not units, not monthly totals. Interviewers don't care about the exact number. They're testing the same core skills as the rest of the case: breaking down complexity, making smart assumptions, and communicating clearly under pressure.</div>
+        </div>
+        <p class="prose">These questions map directly onto real business decisions — should Apple launch a new product, should a retailer enter a new city. A tight, structured estimate delivered in under two minutes is one of the fastest ways to look like a prepared candidate.</p>
+        <div class="tip-box">
+          <div class="tip-box-label">The four habits that separate strong answers</div>
+          <div class="tip-box-text">Clarify scope before you calculate. Round every number. Think out loud so the interviewer can follow your logic. End with business implications, not just a number.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5-STEP FRAMEWORK -->
+    <section class="section" id="framework">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">The 5-Step Framework</div>
+          <div class="section-subtitle">Repeatable enough to handle any market sizing prompt you're given</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="num-list">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Ask clarifying questions first.</strong> Confirm scope (US vs global) and product definition (all toothbrushes vs manual only) before any math starts.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Choose your solution path.</strong> Top-down: start from population and narrow down. Bottom-up: start from one person or unit and scale up.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Use rounded numbers.</strong> 300 million instead of 311 million. 40% instead of 43.7%. 2 instead of 2.3. Logic matters more than exactness.</div></li>
+          <li class="num-item"><span class="num-badge">4</span><div class="num-text"><strong>Sanity check the result.</strong> Validate that the magnitude makes sense and catch obvious errors, like an estimate that's absurdly large or small.</div></li>
+          <li class="num-item"><span class="num-badge">5</span><div class="num-text"><strong>State the implications.</strong> Tie the number back to growth, margins, and competitiveness — this shows strategic thinking, not just arithmetic.</div></li>
+        </ul>
+
+        <div class="section-label">Choosing a path — top-down vs bottom-up</div>
+        <div class="approach-grid">
+          <div class="approach-card">
+            <div class="approach-title">Top-Down</div>
+            <div class="approach-text">Start with the total population and apply a series of narrowing filters (ownership rate, usage rate, purchase rate) until you reach the addressable group.</div>
+            <div class="approach-example">e.g. US population → % who brush teeth → % who use manual brushes → annual units → price</div>
+          </div>
+          <div class="approach-card alt">
+            <div class="approach-title">Bottom-Up</div>
+            <div class="approach-text">Start with a single person or household's spending behavior, then scale that figure up by the number of people or households in the addressable market.</div>
+            <div class="approach-example">e.g. one household's annual spend → × number of households in scope</div>
+          </div>
+        </div>
+
+        <div class="tip-box" style="margin-bottom: 0;">
+          <div class="tip-box-label">Golden rule</div>
+          <div class="tip-box-text">State your approach out loud before you calculate: "I'll solve this top-down, starting with the US population." Get a nod from the interviewer, then start the math. Never calculate silently — thinking out loud lets the interviewer follow your assumptions and correct bad ones early.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANCHOR NUMBERS -->
+    <section class="section" id="anchors">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Anchor Numbers &amp; Replacement Cycles</div>
+          <div class="section-subtitle">Memorize these so you never stall doing basic population math mid-case</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="section-label">Anchor numbers — memorize these</div>
+        <div class="anchor-grid">
+          <div class="anchor-card"><div class="anchor-value">320M</div><div class="anchor-label">US population</div></div>
+          <div class="anchor-card"><div class="anchor-value">8B</div><div class="anchor-label">Global population</div></div>
+          <div class="anchor-card"><div class="anchor-value">2.5</div><div class="anchor-label">US household size</div></div>
+          <div class="anchor-card"><div class="anchor-value">80 yrs</div><div class="anchor-label">US life expectancy</div></div>
+        </div>
+
+        <div class="section-label">Replacement cycles — don't overcount annual sales</div>
+        <div class="anchor-grid">
+          <div class="anchor-card"><div class="anchor-value">~10 yrs</div><div class="anchor-label">Cars</div></div>
+          <div class="anchor-card"><div class="anchor-value">~3 yrs</div><div class="anchor-label">Smartphones</div></div>
+          <div class="anchor-card"><div class="anchor-value">~4 yrs</div><div class="anchor-label">Laptops</div></div>
+          <div class="anchor-card"><div class="anchor-value">~1 mo</div><div class="anchor-label">Toothbrushes</div></div>
+        </div>
+
+        <div class="info-box" style="margin-bottom: 0;">
+          <div class="info-box-label">Segment population when usage varies by age</div>
+          <div class="info-box-text">Don't apply one flat rate across the whole population if usage clearly skews by demographic. Video game spending skews toward younger age groups; hearing aid spending skews toward older age groups. Segmenting first, then applying a rate to each segment, produces a far more credible estimate.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 MISTAKES -->
+    <section class="section" id="mistakes">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">3 Mistakes That Sink Candidates</div>
+          <div class="section-subtitle">Avoid these and you're already ahead of most applicants</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul class="num-list" style="margin-bottom: 0;">
+          <li class="num-item"><span class="num-badge">1</span><div class="num-text"><strong>Starting without structure.</strong> The biggest early failure. State your approach and get interviewer buy-in before any calculation begins.</div></li>
+          <li class="num-item"><span class="num-badge">2</span><div class="num-text"><strong>Overly precise numbers.</strong> Decimal-heavy math creates avoidable errors and signals you're missing the point. Rounded estimates are always better than exact ones.</div></li>
+          <li class="num-item"><span class="num-badge">3</span><div class="num-text"><strong>Calculating silently.</strong> Working it out in your head hides your reasoning. Thinking out loud lets the interviewer follow — and correct — your assumptions in real time.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EXAMPLE 1: TOOTHBRUSHES -->
+    <section class="section" id="example1">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">Worked Example — Manual Toothbrushes (Top-Down)</div>
+          <div class="section-subtitle">A full top-down solve, start to finish</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="case-prompt">
+          <div class="case-prompt-speaker">Prompt</div>
+          <div class="case-prompt-text">"Estimate the annual market size for manual toothbrushes in the United States."</div>
+        </div>
+
+        <div class="section-label">Calculation chain</div>
+        <div class="calc-chain">
+          <div class="calc-step">
+            <div class="calc-step-num">1</div>
+            <div class="calc-step-text"><strong>US population</strong> — starting anchor number</div>
+            <div class="calc-step-value">320,000,000</div>
+          </div>
+          <div class="calc-step">
+            <div class="calc-step-num">2</div>
+            <div class="calc-step-text">× <strong>90%</strong> brush their teeth regularly</div>
+            <div class="calc-step-value">288,000,000</div>
+          </div>
+          <div class="calc-step">
+            <div class="calc-step-num">3</div>
+            <div class="calc-step-text">× <strong>75%</strong> use a manual (not electric) toothbrush</div>
+            <div class="calc-step-value">216,000,000 users</div>
+          </div>
+          <div class="calc-step">
+            <div class="calc-step-num">4</div>
+            <div class="calc-step-text">× <strong>10 toothbrushes/year</strong> per person (~1 per month)</div>
+            <div class="calc-step-value">2.16B units/yr</div>
+          </div>
+          <div class="calc-step">
+            <div class="calc-step-num">5</div>
+            <div class="calc-step-text">× <strong>$2</strong> average price per toothbrush</div>
+            <div class="calc-step-value">—</div>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-label">Estimated annual market size</div>
+          <div class="calc-result-value">≈ $4.32 billion / year</div>
+        </div>
+
+        <div class="sanity-box">
+          <div class="sanity-label">Sanity check</div>
+          <div class="sanity-text">
+            <ul>
+              <li>10 toothbrushes/year is roughly one per month — reasonable.</li>
+              <li>216 million users is about two-thirds of Americans — plausible.</li>
+              <li>$4.32 billion is a believable market size; $430 billion would immediately signal a magnitude error.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-box" style="margin-top: 12px; margin-bottom: 0;">
+          <div class="tip-box-label">Implication — step 5 of the framework</div>
+          <div class="tip-box-text">The market is substantial, but a "should we enter?" recommendation still needs the growth rate, profit margins, and competitive landscape before committing to an answer.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAMPLE 2: SMARTPHONE INSURANCE -->
+    <section class="section" id="example2">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div>
+          <div class="section-title">Worked Example — Smartphone Insurance</div>
+          <div class="section-subtitle">Solved live in roughly 90 seconds</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="case-prompt">
+          <div class="case-prompt-speaker">Prompt</div>
+          <div class="case-prompt-text">"Estimate the annual insurance revenue for smartphones in the United States."</div>
+        </div>
+
+        <div class="section-label">Calculation chain</div>
+        <div class="calc-chain">
+          <div class="calc-step">
+            <div class="calc-step-num">1</div>
+            <div class="calc-step-text"><strong>US population</strong> — starting anchor number</div>
+            <div class="calc-step-value">320,000,000</div>
+          </div>
+          <div class="calc-step">
+            <div class="calc-step-num">2</div>
+            <div class="calc-step-text">× <strong>75%</strong> own a smartphone</div>
+            <div class="calc-step-value">240,000,000 owners</div>
+          </div>
+          <div class="calc-step">
+            <div class="calc-step-num">3</div>
+            <div class="calc-step-text">× <strong>30%</strong> purchase insurance on their device</div>
+            <div class="calc-step-value">72,000,000 insured</div>
+          </div>
+          <div class="calc-step">
+            <div class="calc-step-num">4</div>
+            <div class="calc-step-text">× <strong>$120</strong> average annual premium</div>
+            <div class="calc-step-value">—</div>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-label">Estimated annual market size</div>
+          <div class="calc-result-value">≈ $8.64 billion / year</div>
+        </div>
+
+        <div class="sanity-box">
+          <div class="sanity-label">Sanity check</div>
+          <div class="sanity-text">
+            <ul>
+              <li>30% insurance adoption among smartphone owners is a reasonable estimate.</li>
+              <li>$120/year in premiums feels plausible for device insurance.</li>
+              <li>$8.64 billion is large but not implausible for a national annual figure.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-box" style="margin-top: 12px; margin-bottom: 0;">
+          <div class="tip-box-label">Implication — step 5 of the framework</div>
+          <div class="tip-box-text">Market appears attractive on size alone, but still needs growth rate, competitive intensity, margins, and the major incumbents mapped out before recommending entry.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK REFERENCE -->
+    <section class="section" id="quickref">
+      <div class="section-header">
+        <div class="section-num">★</div>
+        <div>
+          <div class="section-title">Quick Reference — Market Sizing Checklist</div>
+          <div class="section-subtitle">Read this immediately before any estimation question</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="quick-ref" style="margin-bottom: 0;">
+          <div class="quick-ref-title">Market Sizing Standards</div>
+          <div class="quick-ref-list">
+            <div class="quick-ref-item"><span class="quick-ref-item-num">1</span><span>Clarify scope first — geography and product definition — before any math starts.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">2</span><span>State your approach out loud: <em>"I'll solve this top-down, starting with..."</em></span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">3</span><span>Round every number: 300M not 311M, 40% not 43.7%, 2 not 2.3.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">4</span><span>Segment the population when usage clearly varies by age or demographic.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">5</span><span>Check replacement cycles before multiplying by a "per year" purchase rate — don't overcount.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">6</span><span>Sanity check the magnitude before presenting the number — catch anything off by 10x or more.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">7</span><span>Always close with implications — growth, margins, competition — never end on the number alone.</span></div>
+            <div class="quick-ref-item"><span class="quick-ref-item-num">8</span><span>Target roughly 90 seconds of talk time for the full calculation, not silence followed by an answer.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAM / SAM / SOM -->
+    <section class="section" id="tamsamsom">
+      <div class="section-header">
+        <div class="section-num">▸</div>
+        <div>
+          <div class="section-title">TAM / SAM / SOM</div>
+          <div class="section-subtitle">The market-opportunity funnel — pairs directly with the sizing method above</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="prose">Once you've sized a market, this framework carves it into what's <em>realistically capturable</em>. It turns a big top-down number into a credible revenue opportunity — exactly the move interviewers want after a market-sizing estimate.</p>
+        <div class="funnel">
+          <div class="funnel-tier funnel-t1">
+            <div class="funnel-tier-name">TAM — Total Addressable Market</div>
+            <div class="funnel-tier-desc">The entire market for the product or service. Estimate top-down (e.g. relevant population segments).</div>
+          </div>
+          <div class="funnel-tier funnel-t2">
+            <div class="funnel-tier-name">SAM — Serviceable Addressable Market</div>
+            <div class="funnel-tier-desc">The slice you can realistically target over the long term, given reach and product fit.</div>
+          </div>
+          <div class="funnel-tier funnel-t3">
+            <div class="funnel-tier-name">SOM — Serviceable Obtainable Market</div>
+            <div class="funnel-tier-desc">What you can actually win in the short term, given competition.</div>
+          </div>
+        </div>
+        <div class="formula-box">
+          <div class="formula-label">The two multipliers</div>
+          <div class="formula-eq">SAM = TAM × market penetration</div>
+          <div class="formula-eq">SOM = SAM × market share</div>
+        </div>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">Worked link — GCC food-delivery app</div>
+          <div class="tip-box-text">TAM = all GCC adults who order food online. SAM = those in cities where you'd actually operate (say the major UAE + Saudi metros). SOM = the share you'd win against Talabat, Deliveroo, and local players in year one. Each step should feel defensible, not plucked from air.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTER'S FIVE FORCES -->
+    <section class="section" id="porter">
+      <div class="section-header">
+        <div class="section-num">▸</div>
+        <div>
+          <div class="section-title">Porter's Five Forces</div>
+          <div class="section-subtitle">Judging how attractive (profitable) an industry structurally is</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p class="prose">Use this to assess industry attractiveness in market-entry, investment, and growth cases. The logic: the more favourable the five forces, the more sustainable the profit pool. Read each as "our power / profitability rises when…"</p>
+        <div class="framework-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="fw-card">
+            <div class="fw-card-title">Buyer power</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item">Lower when buyers are many and fragmented</li>
+              <li class="fw-sub-item">Lower when switching costs are high</li>
+              <li class="fw-sub-item">Lower when products are differentiated</li>
+            </ul>
+          </div>
+          <div class="fw-card">
+            <div class="fw-card-title">Supplier power</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item">Lower when many suppliers exist</li>
+              <li class="fw-sub-item">Lower when substitute inputs exist</li>
+              <li class="fw-sub-item">Higher when few suppliers control a key input</li>
+            </ul>
+          </div>
+          <div class="fw-card">
+            <div class="fw-card-title">Industry rivalry</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item">Higher with many similar competitors</li>
+              <li class="fw-sub-item">Higher with low differentiation</li>
+              <li class="fw-sub-item">Higher with low barriers to entry</li>
+            </ul>
+          </div>
+          <div class="fw-card">
+            <div class="fw-card-title">Threat of new entrants</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item">Lower with high capital requirements</li>
+              <li class="fw-sub-item">Lower with regulation and licensing</li>
+              <li class="fw-sub-item">Lower with strong incumbent brands</li>
+            </ul>
+          </div>
+          <div class="fw-card">
+            <div class="fw-card-title">Threat of substitutes</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item">Higher when switching costs are low</li>
+              <li class="fw-sub-item">Higher when substitutes perform well</li>
+              <li class="fw-sub-item">Lower when the offering is unique</li>
+            </ul>
+          </div>
+          <div class="fw-card" style="background:var(--accent-pale);border:1px dashed var(--accent);">
+            <div class="fw-card-title" style="color:#8A0E22;">How to use it</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item" style="color:#6B0A1A;">Favourable forces → attractive, defensible profits</li>
+              <li class="fw-sub-item" style="color:#6B0A1A;">Hostile forces → thin, contested margins</li>
+              <li class="fw-sub-item" style="color:#6B0A1A;">Don't recite all five — flag the 1–2 that decide the case</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE STRATEGY: VALUE CHAIN, BCG, ANSOFF -->
+    <section class="section" id="corestrategy">
+      <div class="section-header">
+        <div class="section-num">▸</div>
+        <div>
+          <div class="section-title">Value Chain · BCG Matrix · Ansoff Matrix</div>
+          <div class="section-subtitle">Three workhorses for cost, portfolio, and growth questions</div>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="section-label">Value Chain — for cost and operations cases</div>
+        <p class="prose">Walk the business end to end to locate where cost, value, or a bottleneck sits. Anything can hang off each stage: cost drivers, margin, capability gaps.</p>
+        <div class="chain-flow">
+          <div class="chain-link"><div class="chain-link-name">R&amp;D / Product</div><div class="chain-link-sub">Design, financing</div></div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-link"><div class="chain-link-name">Sourcing</div><div class="chain-link-sub">Raw materials, order qty</div></div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-link"><div class="chain-link-name">Manufacturing</div><div class="chain-link-sub">Labour, machines, method</div></div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-link"><div class="chain-link-name">Warehousing</div><div class="chain-link-sub">Storage, inventory cost</div></div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-link"><div class="chain-link-name">Distribution</div><div class="chain-link-sub">Channels, transport</div></div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-link"><div class="chain-link-name">Retail / Marketing</div><div class="chain-link-sub">Sales, advertising</div></div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-link"><div class="chain-link-name">After-sales</div><div class="chain-link-sub">Service, returns, SLAs</div></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">BCG Matrix — for portfolio and product-mix decisions</div>
+        <p class="prose">Plots each business unit or product on market growth vs relative market share, telling you where to invest, harvest, or exit.</p>
+        <div class="matrix-wrap">
+          <div class="matrix-corner"></div>
+          <div class="matrix-col-label">High market share</div>
+          <div class="matrix-col-label">Low market share</div>
+          <div class="matrix-row-label">High growth</div>
+          <div class="matrix-cell" style="border:2px solid var(--accent);"><div class="matrix-cell-title" style="color:var(--accent);">★ Stars</div><div class="matrix-cell-desc">Market-leading, cash-hungry. Invest to defend and grow.</div></div>
+          <div class="matrix-cell"><div class="matrix-cell-title">? Question Marks</div><div class="matrix-cell-desc">Could become stars with investment — or be dropped.</div></div>
+          <div class="matrix-row-label">Low growth</div>
+          <div class="matrix-cell"><div class="matrix-cell-title">🐄 Cash Cows</div><div class="matrix-cell-desc">Low reinvestment, steady cash. Milk to fund stars.</div></div>
+          <div class="matrix-cell"><div class="matrix-cell-title">🐕 Dogs</div><div class="matrix-cell-desc">Low share, low growth. Divest or liquidate.</div></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Ansoff Matrix — for growth-strategy cases</div>
+        <p class="prose">Maps four growth routes by product × market, ordered from least to most risky. The backbone of the organic-growth branch in a growth case.</p>
+        <div class="matrix-wrap">
+          <div class="matrix-corner"></div>
+          <div class="matrix-col-label">Existing market</div>
+          <div class="matrix-col-label">New market</div>
+          <div class="matrix-row-label">Existing product</div>
+          <div class="matrix-cell" style="border:2px solid var(--accent);"><div class="matrix-cell-title" style="color:var(--accent);">Market Penetration</div><div class="matrix-cell-desc">Least risky. More marketing, better pricing, higher loyalty.</div></div>
+          <div class="matrix-cell"><div class="matrix-cell-title">Market Development</div><div class="matrix-cell-desc">Same product, new geography or segment.</div></div>
+          <div class="matrix-row-label">New product</div>
+          <div class="matrix-cell"><div class="matrix-cell-title">Product Development</div><div class="matrix-cell-desc">New products for existing customers. Needs R&amp;D.</div></div>
+          <div class="matrix-cell"><div class="matrix-cell-title">Diversification</div><div class="matrix-cell-desc">Riskiest — new product <em>and</em> new market at once.</div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ENVIRONMENT SCAN: PESTEL + SWOT -->
+    <section class="section" id="envscan">
+      <div class="section-header">
+        <div class="section-num">▸</div>
+        <div>
+          <div class="section-title">PESTEL &amp; SWOT</div>
+          <div class="section-subtitle">Two quick scans for context — useful early, dangerous if overused</div>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="section-label">PESTEL — external macro environment</div>
+        <p class="prose">Six lenses on the outside forces acting on a business. Handy for market-entry context or the "external risks" bucket of an M&amp;A / DD case.</p>
+        <div class="bucket-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="bucket-card"><div class="bucket-name">Political<br><span style="font-weight:400;font-size:10px;color:var(--text-muted);">Elections, fiscal policy, taxation</span></div></div>
+          <div class="bucket-card"><div class="bucket-name">Economic<br><span style="font-weight:400;font-size:10px;color:var(--text-muted);">Inflation, rates, FX, jobs</span></div></div>
+          <div class="bucket-card"><div class="bucket-name">Social<br><span style="font-weight:400;font-size:10px;color:var(--text-muted);">Demographics, culture, trends</span></div></div>
+          <div class="bucket-card"><div class="bucket-name">Technological<br><span style="font-weight:400;font-size:10px;color:var(--text-muted);">Automation, R&amp;D, adoption</span></div></div>
+          <div class="bucket-card"><div class="bucket-name">Environmental<br><span style="font-weight:400;font-size:10px;color:var(--text-muted);">Regulation, carbon, inputs</span></div></div>
+          <div class="bucket-card"><div class="bucket-name">Legal<br><span style="font-weight:400;font-size:10px;color:var(--text-muted);">IP, licensing, compliance</span></div></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">SWOT — internal vs external, helpful vs harmful</div>
+        <div class="matrix-wrap">
+          <div class="matrix-corner"></div>
+          <div class="matrix-col-label">Helpful</div>
+          <div class="matrix-col-label">Harmful</div>
+          <div class="matrix-row-label">Internal</div>
+          <div class="matrix-cell"><div class="matrix-cell-title">Strengths</div><div class="matrix-cell-desc">Loyal base, strong brand, proprietary tech.</div></div>
+          <div class="matrix-cell"><div class="matrix-cell-title">Weaknesses</div><div class="matrix-cell-desc">Thin capital, high attrition, weak brand.</div></div>
+          <div class="matrix-row-label">External</div>
+          <div class="matrix-cell"><div class="matrix-cell-title">Opportunities</div><div class="matrix-cell-desc">Falling input prices, new tech, tax shifts.</div></div>
+          <div class="matrix-cell"><div class="matrix-cell-title">Threats</div><div class="matrix-cell-desc">New competition, regulation, supply limits.</div></div>
+        </div>
+
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">Use as a checklist, not a crutch</div>
+          <div class="tip-box-text">PESTEL and SWOT are scanning tools, not case structures. Interviewers penalise a candidate who force-fits "let me do a SWOT" onto a profitability case. Use them to <em>generate</em> ideas for a bucket, then fold the relevant points into a tailored framework.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOAT: VRIO + 8 SOURCES -->
+    <section class="section" id="moat">
+      <div class="section-header">
+        <div class="section-num">▸</div>
+        <div>
+          <div class="section-title">Competitive Advantage — VRIO &amp; the Moat</div>
+          <div class="section-subtitle">Whether an edge is real and whether it lasts</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="section-label">VRIO — is a resource a true, lasting advantage?</div>
+        <p class="prose">Run a resource or capability through four tests in order. It only becomes a <em>sustained</em> competitive advantage if it passes all four.</p>
+        <div class="vrio-flow">
+          <div class="vrio-step"><div class="vrio-letter">V</div><div class="vrio-word">Valuable</div><div class="vrio-q">Does it exploit an opportunity or neutralise a threat?</div></div>
+          <div class="vrio-step"><div class="vrio-letter">R</div><div class="vrio-word">Rare</div><div class="vrio-q">Do few competitors have it?</div></div>
+          <div class="vrio-step"><div class="vrio-letter">I</div><div class="vrio-word">Inimitable</div><div class="vrio-q">Is it hard or costly to copy?</div></div>
+          <div class="vrio-step"><div class="vrio-letter">O</div><div class="vrio-word">Organised</div><div class="vrio-q">Is the firm set up to capture the value?</div></div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-label">Reading the result</div>
+          <div class="info-box-text">Fails "valuable" → competitive <strong>disadvantage</strong>. Valuable but not rare → <strong>parity</strong>. Valuable + rare but imitable → <strong>temporary</strong> advantage. All four → <strong>sustained</strong> advantage.</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Eight sources of a sustainable moat</div>
+        <p class="prose">A practical checklist for judging how defensible a business is — in growth, entry, and especially due-diligence cases. The more of these a company holds, the wider its moat.</p>
+        <div class="framework-grid">
+          <div class="fw-card"><div class="fw-card-title">Distribution control</div><ul class="fw-sub-list"><li class="fw-sub-item">Owning location or channels rivals can't reach</li></ul></div>
+          <div class="fw-card"><div class="fw-card-title">Locked-in supply</div><ul class="fw-sub-list"><li class="fw-sub-item">Secured access to scarce inputs</li></ul></div>
+          <div class="fw-card"><div class="fw-card-title">Switching costs</div><ul class="fw-sub-list"><li class="fw-sub-item">Integration or psychological barriers to leaving</li></ul></div>
+          <div class="fw-card"><div class="fw-card-title">Scale</div><ul class="fw-sub-list"><li class="fw-sub-item">Economies of scale as an entry barrier</li></ul></div>
+          <div class="fw-card"><div class="fw-card-title">Network effects</div><ul class="fw-sub-list"><li class="fw-sub-item">Demand-side scale — more users, more value</li></ul></div>
+          <div class="fw-card"><div class="fw-card-title">Innovation</div><ul class="fw-sub-list"><li class="fw-sub-item">A durable pace of product advantage</li></ul></div>
+          <div class="fw-card"><div class="fw-card-title">Brand loyalty</div><ul class="fw-sub-list"><li class="fw-sub-item">Preference that survives price competition</li></ul></div>
+          <div class="fw-card"><div class="fw-card-title">Intellectual property</div><ul class="fw-sub-list"><li class="fw-sub-item">Patents, copyrights, proprietary know-how</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKETING FRAMEWORKS -->
+    <section class="section" id="marketing">
+      <div class="section-header">
+        <div class="section-num">▸</div>
+        <div>
+          <div class="section-title">Marketing Frameworks — 5C · 4P · 4A · STP</div>
+          <div class="section-subtitle">For go-to-market, product-launch, and pricing cases</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="framework-grid" style="grid-template-columns:repeat(2,1fr);">
+
+          <div class="fw-card">
+            <div class="fw-card-title">5C's — diagnose the landscape</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Company</strong> — who you are, your value chain</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Customers</strong> — segments, needs, wants</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Competitors</strong> — who's in your way</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Collaborators</strong> — vendors, partners</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Context</strong> — the wider climate (SWOT / PESTEL)</li>
+            </ul>
+          </div>
+
+          <div class="fw-card">
+            <div class="fw-card-title">4P's — build the offer</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Product</strong> — design, features, quality, brand</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Price</strong> — strategy, discounts, payment</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Place</strong> — channels, distribution, logistics</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Promotion</strong> — messaging, channel mix</li>
+            </ul>
+          </div>
+
+          <div class="fw-card">
+            <div class="fw-card-title">4A's — customer adoption lens</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Awareness</strong> — do they know the product/brand?</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Affordability</strong> — economic &amp; psychological</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Accessibility</strong> — availability &amp; convenience</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Acceptability</strong> — functional &amp; psychological fit</li>
+            </ul>
+          </div>
+
+          <div class="fw-card">
+            <div class="fw-card-title">STP — target &amp; position</div>
+            <ul class="fw-sub-list">
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Segmentation</strong> — split the market into groups</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Targeting</strong> — pick the most attractive segment</li>
+              <li class="fw-sub-item"><strong style="color:var(--navy);">Positioning</strong> — design the offer to win it</li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="tip-box" style="margin-bottom:0;">
+          <div class="tip-box-label">When each earns its place</div>
+          <div class="tip-box-text">5C's to diagnose a market landscape · 4P's for product-launch and go-to-market · 4A's when the issue is why customers aren't adopting · STP whenever the question is <em>which</em> customers to chase and how to appeal to them.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  Sources: Market sizing from <strong>"Learn Case Interviews in Under 30 Minutes"</strong> (Taylor Warfield, ex-Bain). Strategy &amp; marketing frameworks from <strong>IIM Ahmedabad</strong>, <strong>Chicago Booth</strong> &amp; <strong>Wharton</strong> casebooks 2024–25 · Living document.
+</footer>
+
+<script>
+  const sidebarItems = document.querySelectorAll('.sidebar-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        const matchingLink = document.querySelector(`.sidebar-item[href="#${id}"]`);
+        if (matchingLink) {
+          sidebarItems.forEach(i => i.classList.remove('active'));
+          matchingLink.classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-80px 0px 0px 0px' });
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
